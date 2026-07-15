@@ -33,42 +33,72 @@
             --transition: 0.28s cubic-bezier(0.4,0,0.2,1);
         }
         * { box-sizing: border-box; }
-        body { font-family: 'Kanit', sans-serif; background: var(--cb-bg); margin: 0; overflow: hidden; height: 100dvh; }
+        body {
+            font-family: 'Kanit', sans-serif;
+            background: var(--cb-bg);
+            margin: 0;
+            overflow: hidden;
+            height: 100dvh;
+        }
 
+        /* ─── HEADER ─── */
         #app-header {
-            position: fixed; top: 0; left: 0; right: 0;
+            position: fixed;
+            top: 0; left: 0; right: 0;
             height: var(--header-height);
             background: linear-gradient(180deg, #0b5690 0%, #0a4d7a 100%);
-            display: flex; align-items: center; justify-content: space-between;
-            padding: 0; z-index: 300;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0;
+            z-index: 300;
             box-shadow: 0 1px 0 rgba(255,255,255,0.06), 0 4px 24px rgba(8,57,94,0.4);
             overflow: hidden;
         }
+        /* Premium shimmer line at bottom of header */
         #app-header::after {
-            content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 1px;
+            content: '';
+            position: absolute;
+            bottom: 0; left: 0; right: 0;
+            height: 1px;
             background: linear-gradient(90deg, transparent 0%, rgba(77,195,247,0.5) 30%, rgba(26,163,232,0.8) 50%, rgba(77,195,247,0.5) 70%, transparent 100%);
         }
+
         #header-left {
             display: flex; align-items: center; gap: 10px;
-            width: var(--sidebar-width); flex-shrink: 0;
-            height: var(--header-height); padding: 0 16px;
+            width: var(--sidebar-width);
+            flex-shrink: 0;
+            height: var(--header-height);
+            padding: 0 16px;
             transition: width var(--transition);
             border-right: 1px solid rgba(255,255,255,0.07);
         }
         body.sidebar-collapsed #header-left { width: var(--sidebar-collapsed-width); }
-        @media (max-width: 767px) { #header-left { width: auto; padding: 0 12px; flex: 0 0 auto; } }
+        @media (max-width: 767px) {
+            #header-left { width: auto; padding: 0 12px; flex: 0 0 auto; }
+        }
 
+        /* Hamburger */
         #sidebar-toggle {
-            width: 38px; height: 38px; border-radius: 10px; border: none;
-            background: transparent; cursor: pointer;
-            display: flex; flex-direction: column; align-items: center; justify-content: center;
-            gap: 5px; transition: background var(--transition); padding: 0;
+            width: 38px; height: 38px;
+            border-radius: 10px;
+            border: none;
+            background: transparent;
+            cursor: pointer;
+            display: flex; flex-direction: column;
+            align-items: center; justify-content: center;
+            gap: 5px;
+            transition: background var(--transition);
+            padding: 0;
         }
         #sidebar-toggle:hover { background: rgba(255,255,255,0.1); }
         #sidebar-toggle span {
-            display: block; width: 20px; height: 2px;
-            background: rgba(255,255,255,0.85); border-radius: 2px;
-            transition: all var(--transition); transform-origin: center;
+            display: block;
+            width: 20px; height: 2px;
+            background: rgba(255,255,255,0.85);
+            border-radius: 2px;
+            transition: all var(--transition);
+            transform-origin: center;
         }
         body.sidebar-open #sidebar-toggle span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
         body.sidebar-open #sidebar-toggle span:nth-child(2) { opacity: 0; transform: scaleX(0); }
@@ -78,29 +108,45 @@
         #logo-area .logo-icon {
             width: 32px; height: 32px;
             background: linear-gradient(135deg, #3b82f6, #6366f1);
-            border-radius: 9px; display: flex; align-items: center; justify-content: center;
+            border-radius: 9px;
+            display: flex; align-items: center; justify-content: center;
             box-shadow: 0 2px 8px rgba(99,102,241,0.45), 0 0 0 1px rgba(255,255,255,0.1);
-            font-size: 1.1rem; font-weight: 800; color: #fff;
+            font-size: 1.1rem; font-weight: 800; color: #fff; letter-spacing: -0.02em;
         }
-        #logo-area h1 { font-size: 1rem; font-weight: 700; color: #fff; margin: 0; }
+        #logo-area h1 { font-size: 1rem; font-weight: 700; color: #ffffff; margin: 0; letter-spacing: -0.02em; }
+        #logo-area span { font-size: 0.65rem; font-weight: 400; color: var(--cb-pale); display: block; margin-top: -2px; }
+
         #header-right { display: flex; align-items: center; gap: 8px; padding: 0 16px; flex: 1; justify-content: flex-end; }
 
         .header-action-btn {
-            display: flex; align-items: center; gap: 6px; padding: 6px 12px;
-            border: none; border-radius: 8px; font-family: 'Kanit', sans-serif;
-            font-size: 0.78rem; font-weight: 500; cursor: pointer;
-            transition: all 0.18s ease; white-space: nowrap;
+            display: flex; align-items: center; gap: 6px;
+            padding: 6px 12px;
+            border: none; border-radius: 8px;
+            font-family: 'Kanit', sans-serif;
+            font-size: 0.78rem; font-weight: 500;
+            cursor: pointer;
+            transition: all 0.18s ease;
+            white-space: nowrap;
         }
         #booking-btn {
-            display: flex; align-items: center; gap: 6px; padding: 6px 12px;
-            border: none; border-radius: 8px; font-family: 'Kanit', sans-serif;
-            font-size: 0.78rem; font-weight: 500; cursor: pointer;
-            color: rgba(255,255,255,0.85); background: transparent;
-            transition: all 0.18s ease; white-space: nowrap;
+            display: flex; align-items: center; gap: 6px;
+            padding: 6px 12px;
+            border: none; border-radius: 8px;
+            font-family: 'Kanit', sans-serif;
+            font-size: 0.78rem; font-weight: 500;
+            cursor: pointer;
+            color: rgba(255,255,255,0.85);
+            background: transparent;
+            transition: all 0.18s ease;
+            white-space: nowrap;
         }
         #booking-btn:hover { background: rgba(255,255,255,0.12); color: #fff; }
         #booking-btn.active-btn { background: rgba(255,255,255,0.18); color: #fff; font-weight: 600; }
-        @keyframes truck-move { 0%, 100% { transform: translateX(0); } 50% { transform: translateX(2.5px); } }
+        #booking-btn svg { flex-shrink: 0; transition: color 0.18s; }
+        @keyframes truck-move {
+            0%, 100% { transform: translateX(0); }
+            50% { transform: translateX(2.5px); }
+        }
         #booking-btn:hover svg { animation: truck-move 0.5s ease infinite; }
         #manager-btn { background: transparent; color: rgba(255,255,255,0.85); border: none; }
         #manager-btn:hover { background: rgba(255,255,255,0.12); color: #fff; }
@@ -110,37 +156,68 @@
         #meeting-btn.active-btn { background: rgba(255,255,255,0.18); color: #fff; font-weight: 600; }
 
         #zoom-controls {
-            display: flex; background: rgba(255,255,255,0.08);
-            border: 1px solid rgba(255,255,255,0.12); border-radius: 9px; padding: 3px; gap: 2px;
+            display: flex;
+            background: rgba(255,255,255,0.08);
+            border: 1px solid rgba(255,255,255,0.12);
+            border-radius: 9px;
+            padding: 3px;
+            gap: 2px;
         }
         #zoom-controls button {
-            padding: 4px 10px; border: none; border-radius: 7px;
-            font-family: 'Kanit', sans-serif; font-size: 0.7rem; font-weight: 500;
-            cursor: pointer; color: rgba(255,255,255,0.6); background: transparent; transition: all 0.18s;
+            padding: 4px 10px;
+            border: none; border-radius: 7px;
+            font-family: 'Kanit', sans-serif;
+            font-size: 0.7rem; font-weight: 500;
+            cursor: pointer;
+            color: rgba(255,255,255,0.6);
+            background: transparent;
+            transition: all 0.18s;
         }
-        #zoom-controls button.active-zoom { background: rgba(255,255,255,0.18); color: #fff; font-weight: 600; }
+        #zoom-controls button.active-zoom {
+            background: rgba(255,255,255,0.18);
+            color: #fff;
+            font-weight: 600;
+            box-shadow: 0 1px 6px rgba(8,57,94,0.3);
+        }
 
         #fullscreen-btn, #theme-toggle {
-            width: 34px; height: 34px; border: 1px solid rgba(255,255,255,0.12);
-            border-radius: 9px; background: rgba(255,255,255,0.08); cursor: pointer;
+            width: 34px; height: 34px;
+            border: 1px solid rgba(255,255,255,0.12);
+            border-radius: 9px;
+            background: rgba(255,255,255,0.08);
+            cursor: pointer;
             display: flex; align-items: center; justify-content: center;
-            color: rgba(255,255,255,0.75); transition: all 0.2s; flex-shrink: 0;
+            color: rgba(255,255,255,0.75);
+            transition: all 0.2s;
+            flex-shrink: 0;
         }
         #fullscreen-btn:hover, #theme-toggle:hover { background: rgba(255,255,255,0.18); color: #fff; }
-        #theme-toggle svg { width: 16px; height: 16px; }
+        #theme-toggle svg { width: 16px; height: 16px; transition: all 0.3s; }
 
+        /* ─── SIDEBAR BACKDROP ─── */
         #sidebar-backdrop {
-            position: fixed; inset: var(--header-height) 0 0 0;
-            background: rgba(0,0,0,0.5); backdrop-filter: blur(4px);
-            z-index: 199; opacity: 0; pointer-events: none; transition: opacity var(--transition);
+            position: fixed;
+            inset: var(--header-height) 0 0 0;
+            background: rgba(0,0,0,0.5);
+            backdrop-filter: blur(4px);
+            z-index: 199;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity var(--transition);
         }
         body.sidebar-open #sidebar-backdrop { opacity: 1; pointer-events: auto; }
 
+        /* ─── SIDEBAR ─── */
         #sidebar {
-            position: fixed; top: var(--header-height); left: 0; bottom: 0;
+            position: fixed;
+            top: var(--header-height);
+            left: 0; bottom: 0;
             width: var(--sidebar-width);
             background: linear-gradient(180deg, #0a4878 0%, #083d6a 100%);
-            z-index: 200; display: flex; flex-direction: column; overflow: hidden;
+            z-index: 200;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
             transform: translateX(-100%);
             transition: transform var(--transition), width var(--transition);
             border-right: 1px solid rgba(255,255,255,0.06);
@@ -157,45 +234,93 @@
         }
 
         #sidebar-head {
-            padding: 18px 16px 12px; display: flex; align-items: center;
-            justify-content: space-between; flex-shrink: 0;
+            padding: 18px 16px 12px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-shrink: 0;
             border-bottom: 1px solid rgba(255,255,255,0.05);
         }
         #sidebar-head .menu-label {
-            font-size: 0.62rem; font-weight: 600; letter-spacing: 0.14em;
-            text-transform: uppercase; color: rgba(123,189,216,0.7);
-            white-space: nowrap; overflow: hidden; transition: opacity var(--transition);
+            font-size: 0.62rem;
+            font-weight: 600;
+            letter-spacing: 0.14em;
+            text-transform: uppercase;
+            color: rgba(123,189,216,0.7);
+            white-space: nowrap;
+            overflow: hidden;
+            transition: opacity var(--transition);
         }
         body.sidebar-collapsed #sidebar-head .menu-label { opacity: 0; }
 
         #refresh-btn {
-            width: 28px; height: 28px; border: none; border-radius: 7px;
-            background: rgba(255,255,255,0.05); cursor: pointer;
+            width: 28px; height: 28px;
+            border: none; border-radius: 7px;
+            background: rgba(255,255,255,0.05);
+            cursor: pointer;
             display: flex; align-items: center; justify-content: center;
-            color: var(--cb-muted); transition: all 0.2s; flex-shrink: 0;
+            color: var(--cb-muted);
+            transition: all 0.2s;
+            flex-shrink: 0;
         }
-        #refresh-btn:hover { background: rgba(255,255,255,0.1); color: #fff; transform: rotate(90deg); }
+        #refresh-btn:hover {
+            background: rgba(255, 255, 255, 0.1); 
+            color: #ffffff; 
+            transform: rotate(90deg); 
+            box-shadow: none; 
+        }
 
         #sidebar-nav {
-            flex: 1; overflow-y: auto; overflow-x: hidden; padding: 10px 8px;
-            scrollbar-width: thin; scrollbar-color: rgba(255,255,255,0.06) transparent;
+            flex: 1;
+            overflow-y: auto;
+            overflow-x: hidden;
+            padding: 10px 8px;
+            scrollbar-width: thin;
+            scrollbar-color: rgba(255,255,255,0.06) transparent;
         }
         #sidebar-nav::-webkit-scrollbar { width: 3px; }
         #sidebar-nav::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.08); border-radius: 4px; }
 
         .cat-group { margin-bottom: 3px; }
         .cat-toggle {
-            width: 100%; display: flex; align-items: center; gap: 10px;
-            padding: 8px 10px; border: none; background: transparent; cursor: pointer;
-            border-radius: 10px; transition: background 0.2s; position: relative; overflow: hidden;
+            width: 100%;
+            display: flex; align-items: center; gap: 10px;
+            padding: 8px 10px;
+            border: none;
+            background: transparent;
+            cursor: pointer;
+            border-radius: 10px;
+            transition: background 0.2s;
+            position: relative;
+            overflow: hidden;
         }
         .cat-toggle:hover { background: rgba(255,255,255,0.06); }
+
         .cat-icon {
-            width: 32px; height: 32px; border-radius: 9px;
+            width: 32px; height: 32px;
+            border-radius: 9px;
             display: flex; align-items: center; justify-content: center;
-            flex-shrink: 0; transition: all 0.25s; position: relative;
+            flex-shrink: 0;
+            font-size: 15px;
+            transition: all 0.25s;
+            position: relative;
         }
-        .cat-toggle:hover .cat-icon { transform: scale(1.08); filter: brightness(1.15); }
+        .cat-toggle:hover .cat-icon {
+            transform: scale(1.08);
+            filter: brightness(1.15);
+        }
+        .cat-icon::after {
+            content: '';
+            position: absolute;
+            inset: -4px;
+            border-radius: 12px;
+            opacity: 0;
+            transition: opacity 0.25s;
+            filter: blur(6px);
+            background: inherit;
+        }
+        .cat-toggle:hover .cat-icon::after { opacity: 0.4; }
+
         .cat-info { flex: 1; min-width: 0; text-align: left; overflow: hidden; transition: opacity var(--transition), width var(--transition); }
         .cat-info .cat-name { font-size: 0.78rem; font-weight: 600; color: var(--text-primary); white-space: nowrap; display: block; }
         .cat-info .cat-sub { font-size: 0.63rem; font-weight: 400; color: var(--text-muted); white-space: nowrap; }
@@ -208,11 +333,16 @@
         body.sidebar-collapsed .cat-items { max-height: 0 !important; }
 
         .nav-item {
-            width: 100%; display: flex; align-items: center; gap: 9px;
-            padding: 7px 10px; border: 1px solid transparent; background: transparent;
-            cursor: pointer; border-radius: 8px;
+            width: 100%;
+            display: flex; align-items: center; gap: 9px;
+            padding: 7px 10px;
+            border: 1px solid transparent;
+            background: transparent;
+            cursor: pointer;
+            border-radius: 8px;
             transition: all 0.2s cubic-bezier(0.4,0,0.2,1);
-            margin-bottom: 2px; position: relative;
+            margin-bottom: 2px;
+            position: relative;
         }
         .nav-item:hover {
             background: linear-gradient(135deg, rgba(77,195,247,0.1), rgba(26,163,232,0.06));
@@ -222,21 +352,31 @@
         }
         .nav-item.active {
             background: linear-gradient(135deg, rgba(77,195,247,0.18), rgba(26,163,232,0.1));
-            border-color: rgba(77,195,247,0.28); box-shadow: 0 2px 16px rgba(26,163,232,0.15);
+            border-color: rgba(77,195,247,0.28);
+            box-shadow: 0 2px 16px rgba(26,163,232,0.15);
         }
         .nav-item.active::before {
-            content: ''; position: absolute; left: 0; top: 20%; bottom: 20%; width: 3px;
+            content: '';
+            position: absolute;
+            left: 0; top: 20%; bottom: 20%;
+            width: 3px;
             background: linear-gradient(180deg, var(--cb-light), var(--cb-accent));
-            border-radius: 0 3px 3px 0; box-shadow: 0 0 6px rgba(77,195,247,0.6);
+            border-radius: 0 3px 3px 0;
+            box-shadow: 0 0 6px rgba(77,195,247,0.6);
         }
         .nav-item-dot {
-            width: 5px; height: 5px; border-radius: 50%;
-            background: rgba(123,189,216,0.5); flex-shrink: 0; margin-left: 5px; transition: all 0.2s;
+            width: 5px; height: 5px;
+            border-radius: 50%;
+            background: rgba(123,189,216,0.5);
+            flex-shrink: 0;
+            margin-left: 5px;
+            transition: all 0.2s;
         }
         .nav-item:hover .nav-item-dot { background: #60a5fa; box-shadow: 0 0 6px rgba(96,165,250,0.7); transform: scale(1.3); }
         .nav-item.active .nav-item-dot { background: var(--cb-light); box-shadow: 0 0 5px rgba(77,195,247,0.6); }
         .nav-item-text {
-            font-size: 0.75rem; font-weight: 400; color: rgba(148,163,184,0.9);
+            font-size: 0.75rem; font-weight: 400;
+            color: rgba(148,163,184,0.9);
             text-align: left; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
             transition: color 0.2s, opacity var(--transition);
         }
@@ -244,96 +384,241 @@
         .nav-item.active .nav-item-text { color: #bfdbfe; font-weight: 500; }
         body.sidebar-collapsed .nav-item-dot, body.sidebar-collapsed .nav-item-text { opacity: 0; }
 
+        /* Tooltip */
         body.sidebar-collapsed .cat-toggle { justify-content: center; }
         body.sidebar-collapsed .cat-toggle::after {
-            content: attr(data-tooltip); position: absolute;
+            content: attr(data-tooltip);
+            position: absolute;
             left: calc(var(--sidebar-collapsed-width) + 8px);
             top: 50%; transform: translateY(-50%);
-            background: #0d1b2a; color: #c5cbdd; font-size: 0.72rem; font-weight: 500;
-            padding: 4px 10px; border-radius: 7px; white-space: nowrap;
-            pointer-events: none; opacity: 0; transition: opacity 0.15s;
-            border: 1px solid rgba(255,255,255,0.08); z-index: 999;
+            background: #0d1b2a;
+            color: #c5cbdd;
+            font-size: 0.72rem; font-weight: 500;
+            padding: 4px 10px;
+            border-radius: 7px;
+            white-space: nowrap;
+            pointer-events: none;
+            opacity: 0;
+            transition: opacity 0.15s;
+            border: 1px solid rgba(255,255,255,0.08);
+            z-index: 999;
         }
         body.sidebar-collapsed .cat-toggle:hover::after { opacity: 1; }
 
+        /* Sidebar footer */
+        #sidebar-footer {
+            padding: 12px 10px;
+            border-top: 1px solid rgba(255,255,255,0.06);
+            flex-shrink: 0;
+        }
+        #sidebar-footer .dev-card {
+            display: flex; align-items: center; gap: 10px;
+            padding: 8px 10px;
+            border-radius: 10px;
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(255,255,255,0.08);
+            overflow: hidden;
+        }
+        #sidebar-footer .dev-card img {
+            width: 30px; height: 30px;
+            border-radius: 50%;
+            flex-shrink: 0;
+            border: 1.5px solid rgba(99,102,241,0.5);
+        }
+        #sidebar-footer .dev-info { overflow: hidden; }
+        #sidebar-footer .dev-name { font-size: 0.72rem; font-weight: 600; color: var(--cb-pale); white-space: nowrap; }
+        #sidebar-footer .dev-role { font-size: 0.6rem; color: var(--cb-muted); white-space: nowrap; }
+        body.sidebar-collapsed #sidebar-footer .dev-card { justify-content: center; padding: 6px; }
+        body.sidebar-collapsed #sidebar-footer .dev-info { display: none; }
+
+        /* ─── MAIN AREA ─── */
         #main-area {
-            position: fixed; top: var(--header-height); left: 0; right: 0; bottom: 0;
-            transition: margin-left var(--transition); background: var(--cb-bg);
+            position: fixed;
+            top: var(--header-height);
+            left: 0; right: 0; bottom: 0;
+            transition: margin-left var(--transition);
+            background: var(--cb-bg);
         }
         #content-area { width: 100%; height: 100%; position: relative; overflow: hidden; }
+
+        /* ─── WELCOME SLIDER ─── */
         #welcome-slider { position: absolute; inset: 0; z-index: 2; }
         #slider-wrapper { display: flex; height: 100%; transition: transform 0.55s cubic-bezier(0.4,0,0.2,1); }
         .slide { min-width: 100%; height: 100%; }
 
+        /* SLIDE 1 */
         .slide-1-bg {
             background: linear-gradient(145deg, #0c6ea8 0%, #0d88cc 40%, #1aa3e8 75%, #2ab8f5 100%);
-            position: relative; overflow: hidden;
+            position: relative;
+            overflow: hidden;
         }
         .slide-1-bg::before {
-            content: ''; position: absolute; inset: 0;
+            content: '';
+            position: absolute;
+            inset: 0;
             background-image: radial-gradient(circle, rgba(255,255,255,0.12) 1px, transparent 1px);
-            background-size: 28px 28px; pointer-events: none;
+            background-size: 28px 28px;
+            pointer-events: none;
         }
         .slide-1-bg::after {
-            content: ''; position: absolute; inset: 0;
-            background: radial-gradient(ellipse 60% 50% at 15% 30%, rgba(99,102,241,0.25) 0%, transparent 60%),
-                radial-gradient(ellipse 50% 60% at 85% 70%, rgba(14,165,233,0.2) 0%, transparent 60%);
+            content: '';
+            position: absolute;
+            inset: 0;
+            background:
+                radial-gradient(ellipse 60% 50% at 15% 30%, rgba(99,102,241,0.25) 0%, transparent 60%),
+                radial-gradient(ellipse 50% 60% at 85% 70%, rgba(14,165,233,0.2) 0%, transparent 60%),
+                radial-gradient(ellipse 40% 40% at 50% 10%, rgba(255,255,255,0.08) 0%, transparent 50%);
             pointer-events: none;
         }
 
         .module-card {
-            background: rgba(255,255,255,0.13); backdrop-filter: blur(16px);
-            border: 1px solid rgba(255,255,255,0.22); border-radius: 18px;
-            padding: 24px 16px; cursor: pointer;
+            background: rgba(255,255,255,0.13);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255,255,255,0.22);
+            border-radius: 18px;
+            padding: 24px 16px;
+            cursor: pointer;
             transition: all 0.32s cubic-bezier(0.34,1.56,0.64,1);
-            position: relative; overflow: hidden;
+            position: relative;
+            overflow: hidden;
         }
+        .module-card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 10%; right: 10%;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.5), transparent);
+        }
+        .module-card[data-src] { cursor: pointer; }
         .module-card.no-app { opacity: 0.65; cursor: not-allowed; }
-        .module-card.no-app:hover { transform: none !important; }
+        .module-card.no-app:hover { transform: none !important; box-shadow: none !important; background: rgba(255,255,255,0.13) !important; }
+        .module-card.no-app:hover::after { opacity: 0 !important; }
         .card-badge {
-            display: inline-block; font-size: 0.6rem; font-weight: 600;
-            padding: 2px 8px; border-radius: 20px; margin-top: 6px;
+            display: inline-block;
+            font-size: 0.6rem; font-weight: 600;
+            letter-spacing: 0.06em;
+            padding: 2px 8px;
+            border-radius: 20px;
+            margin-top: 6px;
         }
         .card-badge-on { background: rgba(74,222,128,0.2); color: #86efac; }
         .card-badge-off { background: rgba(255,255,255,0.1); color: rgba(255,255,255,0.45); }
-        .module-card:not(.no-app):hover {
+
+        .module-card::after {
+            content: '';
+            position: absolute;
+            bottom: -20px; left: 50%; transform: translateX(-50%);
+            width: 60%; height: 40px;
+            background: rgba(255,255,255,0.15);
+            filter: blur(16px);
+            border-radius: 50%;
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+        .module-card:hover {
             transform: translateY(-10px) scale(1.04);
-            background: rgba(255,255,255,0.22); border-color: rgba(255,255,255,0.38);
-            box-shadow: 0 24px 48px rgba(8,57,94,0.35);
+            background: rgba(255,255,255,0.22);
+            border-color: rgba(255,255,255,0.38);
+            box-shadow: 0 24px 48px rgba(8,57,94,0.35), 0 0 0 1px rgba(255,255,255,0.15);
         }
+        .module-card:hover::after { opacity: 1; }
+
         .module-icon-wrap {
-            width: 60px; height: 60px; margin: 0 auto 14px; border-radius: 16px;
+            width: 60px; height: 60px;
+            margin: 0 auto 14px;
+            border-radius: 16px;
             display: flex; align-items: center; justify-content: center;
-            box-shadow: 0 8px 24px rgba(0,0,0,0.2); transition: all 0.3s;
+            box-shadow: 0 8px 24px rgba(0,0,0,0.2), inset 0 1px 0 rgba(255,255,255,0.2);
+            position: relative;
+            transition: all 0.3s;
         }
-        .module-card:not(.no-app):hover .module-icon-wrap { transform: scale(1.1) rotate(-3deg); }
+        .module-card:hover .module-icon-wrap {
+            transform: scale(1.1) rotate(-3deg);
+            box-shadow: 0 12px 32px rgba(0,0,0,0.28), inset 0 1px 0 rgba(255,255,255,0.25);
+        }
         .module-card h3 { font-size: 0.95rem; font-weight: 600; color: #fff; margin: 0 0 4px; }
         .module-card p { font-size: 0.72rem; color: rgba(255,255,255,0.75); margin: 0; }
 
-        @keyframes fadeInUp { from { opacity: 0; transform: translateY(28px); } to { opacity: 1; transform: translateY(0); } }
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(28px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
         .animate-fade-in-up { animation: fadeInUp 0.75s cubic-bezier(0.4,0,0.2,1) forwards; opacity: 0; }
-        .delay-100 { animation-delay: 0.1s; } .delay-200 { animation-delay: 0.2s; }
-        .delay-300 { animation-delay: 0.3s; } .delay-400 { animation-delay: 0.4s; }
-        .delay-500 { animation-delay: 0.5s; } .delay-600 { animation-delay: 0.6s; }
-        .delay-700 { animation-delay: 0.7s; } .delay-800 { animation-delay: 0.8s; }
+        .delay-100 { animation-delay: 0.1s; }
+        .delay-200 { animation-delay: 0.2s; }
+        .delay-300 { animation-delay: 0.3s; }
+        .delay-400 { animation-delay: 0.4s; }
+        .delay-500 { animation-delay: 0.5s; }
+        .delay-600 { animation-delay: 0.6s; }
+        .delay-700 { animation-delay: 0.7s; }
+        .delay-800 { animation-delay: 0.8s; }
 
-        .app-iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; display: none; z-index: 10; }
+        /* iframe */
+        .app-iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; display: none; z-index: 10;}
         .app-iframe.visible { display: block; }
 
+        /* Toast */
         #toast {
-            position: fixed; top: calc(var(--header-height) + 14px); left: 50%;
+            position: fixed;
+            top: calc(var(--header-height) + 14px);
+            left: 50%;
             transform: translateX(-50%) translateY(-10px);
-            background: linear-gradient(135deg, #0a4d7a, #1aa3e8); color: #e8f6fd;
-            padding: 10px 20px; border-radius: 10px; box-shadow: 0 4px 20px rgba(10,77,122,0.4);
-            z-index: 9999; opacity: 0; transition: opacity 0.3s, transform 0.3s;
-            display: flex; align-items: center; gap: 8px; font-size: 0.82rem;
-            pointer-events: none; border: 1px solid rgba(255,255,255,0.15);
+            background: linear-gradient(135deg, #0a4d7a, #1aa3e8);
+            color: #e8f6fd;
+            padding: 10px 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 20px rgba(10,77,122,0.4);
+            z-index: 9999;
+            opacity: 0;
+            transition: opacity 0.3s, transform 0.3s;
+            display: flex; align-items: center; gap: 8px;
+            font-size: 0.82rem;
+            pointer-events: none;
+            border: 1px solid rgba(255,255,255,0.15);
         }
         #toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
 
+        /* Developer popup */
+        #developer-popup {
+            position: fixed;
+            top: calc(var(--header-height) + 12px);
+            right: 16px;
+            background: rgba(8,57,94,0.97);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255,255,255,0.12);
+            border-radius: 16px;
+            box-shadow: 0 12px 40px rgba(0,0,0,0.4);
+            padding: 16px;
+            max-width: 260px;
+            z-index: 1000;
+            opacity: 0;
+            transform: translateY(-10px) scale(0.96);
+            transition: opacity 0.35s, transform 0.35s;
+            pointer-events: none;
+        }
+        #developer-popup.visible { opacity: 1; transform: translateY(0) scale(1); pointer-events: auto; }
+        #developer-popup.gone { display: none; }
+        #close-popup { position: absolute; top: 8px; right: 12px; cursor: pointer; color: #7bbdd8; font-size: 1.1rem; line-height: 1; transition: color 0.2s; }
+        #close-popup:hover { color: #e8f6fd; }
+        #ad-popup {
+            margin-top: 10px;
+            background: linear-gradient(135deg, rgba(77,195,247,0.12), rgba(26,163,232,0.08));
+            border: 1px solid rgba(77,195,247,0.2);
+            border-radius: 10px;
+            padding: 8px 10px;
+            display: flex; align-items: flex-start; gap: 8px;
+        }
+        @keyframes flash-pulse { 0%,100% { opacity: 1; } 50% { opacity: 0.75; } }
+        #ad-popup { animation: flash-pulse 4s infinite; }
+
+        /* Modals */
         .full-modal {
-            position: fixed; inset: 0; background: rgba(0,0,0,0.75);
-            backdrop-filter: blur(8px); display: flex; align-items: center; justify-content: center; z-index: 2000;
+            position: fixed; inset: 0;
+            background: rgba(0,0,0,0.75);
+            backdrop-filter: blur(8px);
+            display: flex; align-items: center; justify-content: center;
+            z-index: 2000;
         }
         .full-modal.hidden { display: none; }
         .modal-inner { background: var(--cb-bg); width: 100vw; height: 100vh; display: flex; flex-direction: column; }
@@ -341,35 +626,81 @@
         .modal-topbar h3 { font-size: 0.82rem; font-weight: 600; color: #fff; margin: 0; }
         .modal-close {
             background: rgba(255,255,255,0.15); border: none; border-radius: 6px;
-            color: #fff; cursor: pointer; width: 28px; height: 28px;
-            display: flex; align-items: center; justify-content: center; font-size: 1rem;
+            color: #fff; cursor: pointer;
+            width: 28px; height: 28px;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 1rem; transition: background 0.2s;
         }
         .modal-close:hover { background: rgba(255,255,255,0.3); }
         .modal-iframe { flex: 1; border: 0; width: 100%; }
 
+        /* Responsive */
         @media (max-width: 480px) {
             #header-right .header-action-btn span { display: none; }
+            #header-right .header-action-btn { padding: 6px 10px; }
             #zoom-controls { display: none; }
         }
+        @media (max-width: 360px) { #logo-area span { display: none; } }
 
+        /* ══ Light Mode ══ */
         body.theme-light { background: #f0f5f9; }
-        body.theme-light #app-header { background: linear-gradient(180deg, #ffffff 0%, #f8fbfe 100%) !important; box-shadow: 0 1px 0 rgba(10,77,122,0.1), 0 4px 24px rgba(10,77,122,0.08) !important; }
+        body.theme-light #app-header {
+            background: linear-gradient(180deg, #ffffff 0%, #f8fbfe 100%) !important;
+            box-shadow: 0 1px 0 rgba(10,77,122,0.1), 0 4px 24px rgba(10,77,122,0.08) !important;
+        }
+        body.theme-light #app-header::after {
+            background: linear-gradient(90deg, transparent, rgba(26,163,232,0.4), rgba(13,127,194,0.6), rgba(26,163,232,0.4), transparent) !important;
+        }
+        body.theme-light #header-left { border-right-color: rgba(10,77,122,0.1) !important; }
         body.theme-light #sidebar-toggle span { background: var(--cb-header) !important; }
+        body.theme-light #sidebar-toggle:hover { background: var(--cb-bg) !important; }
         body.theme-light #logo-area h1 { color: var(--cb-header) !important; }
+        body.theme-light #logo-area span { color: var(--cb-mid) !important; }
         body.theme-light #booking-btn, body.theme-light #manager-btn, body.theme-light #meeting-btn { color: var(--cb-header) !important; }
-        body.theme-light #booking-btn:hover, body.theme-light #manager-btn:hover, body.theme-light #meeting-btn:hover { background: var(--cb-bg) !important; }
+        body.theme-light #booking-btn:hover, body.theme-light #manager-btn:hover, body.theme-light #meeting-btn:hover { background: var(--cb-bg) !important; color: var(--cb-sidebar) !important; }
+        body.theme-light #booking-btn.active-btn, body.theme-light #manager-btn.active-btn, body.theme-light #meeting-btn.active-btn { background: var(--cb-bg) !important; color: var(--cb-header) !important; }
         body.theme-light #zoom-controls { background: var(--cb-bg) !important; border-color: rgba(10,77,122,0.12) !important; }
         body.theme-light #zoom-controls button { color: var(--cb-mid) !important; }
         body.theme-light #zoom-controls button.active-zoom { background: #fff !important; color: var(--cb-header) !important; }
         body.theme-light #fullscreen-btn, body.theme-light #theme-toggle { background: var(--cb-bg) !important; border-color: rgba(10,77,122,0.12) !important; color: var(--cb-mid) !important; }
-        body.theme-light #sidebar { background: linear-gradient(180deg, #ffffff 0%, #f7fbfe 100%) !important; }
+        body.theme-light #fullscreen-btn:hover, body.theme-light #theme-toggle:hover { background: var(--cb-pale) !important; color: var(--cb-header) !important; }
+        body.theme-light #sidebar { background: linear-gradient(180deg, #ffffff 0%, #f7fbfe 100%) !important; border-right-color: rgba(10,77,122,0.08) !important; }
+        body.theme-light #sidebar-head { border-bottom-color: rgba(10,77,122,0.07) !important; }
+        body.theme-light #sidebar-head .menu-label { color: var(--cb-mid) !important; }
+        body.theme-light #refresh-btn { background: var(--cb-bg) !important; color: var(--cb-mid) !important; }
+        body.theme-light #refresh-btn:hover { background: var(--cb-pale) !important; color: var(--cb-header) !important; }
         body.theme-light .cat-info .cat-name { color: var(--cb-header) !important; }
         body.theme-light .cat-info .cat-sub { color: var(--cb-muted) !important; }
+        body.theme-light .cat-arrow { color: var(--cb-muted) !important; }
         body.theme-light .cat-toggle:hover { background: var(--cb-bg) !important; }
         body.theme-light .nav-item-text { color: #4a6070 !important; }
         body.theme-light .nav-item:hover { background: var(--cb-bg) !important; border-color: rgba(10,77,122,0.12) !important; box-shadow: none !important; }
         body.theme-light .nav-item:hover .nav-item-text { color: var(--cb-header) !important; }
+        body.theme-light .nav-item:hover .nav-item-dot { background: var(--cb-accent) !important; box-shadow: none !important; }
+        body.theme-light .nav-item.active { background: var(--cb-bg) !important; border-color: rgba(26,163,232,0.28) !important; }
+        body.theme-light .nav-item.active .nav-item-text { color: var(--cb-header) !important; }
+        body.theme-light .nav-item-dot { background: rgba(10,77,122,0.25) !important; }
+        body.theme-light .nav-item.active::before { background: var(--cb-accent) !important; box-shadow: 0 0 6px rgba(26,163,232,0.4) !important; }
+        body.theme-light #sidebar-footer .dev-card { background: var(--cb-bg) !important; border-color: rgba(10,77,122,0.08) !important; }
+        body.theme-light #sidebar-footer .dev-name { color: var(--cb-header) !important; }
+        body.theme-light #sidebar-footer .dev-role { color: var(--cb-muted) !important; }
         body.theme-light #main-area { background: #f0f5f9 !important; }
+        body:not(.theme-light) #main-area { background: #ffffff; }
+        body:not(.theme-light) .slide-1-bg { background: linear-gradient(145deg, #ffffff 0%, #f8fbfe 52%, #eef8fd 100%); }
+        body:not(.theme-light) .slide-1-bg::before { background-image: radial-gradient(circle, rgba(13,127,194,0.16) 1px, transparent 1px); }
+        body:not(.theme-light) .slide-1-bg::after { background: radial-gradient(ellipse 60% 50% at 15% 30%, rgba(77,195,247,0.12) 0%, transparent 60%), radial-gradient(ellipse 50% 60% at 85% 70%, rgba(26,163,232,0.10) 0%, transparent 60%), radial-gradient(ellipse 40% 40% at 50% 10%, rgba(8,57,94,0.05) 0%, transparent 50%); }
+        body:not(.theme-light) #clock-wrap { background: rgba(255,255,255,0.82) !important; border-color: rgba(10,77,122,0.12) !important; box-shadow: 0 8px 28px rgba(10,77,122,0.08); }
+        body:not(.theme-light) #live-date { color: var(--cb-header) !important; }
+        body:not(.theme-light) #live-time { color: var(--cb-header) !important; }
+        body:not(.theme-light) .slide-1-bg h2 { color: var(--cb-header) !important; text-shadow: 0 2px 18px rgba(10,77,122,0.12) !important; }
+        body:not(.theme-light) .module-card { background: rgba(255,255,255,0.88); border-color: rgba(10,77,122,0.10); box-shadow: 0 16px 38px rgba(10,77,122,0.08); }
+        body:not(.theme-light) .module-card::before { background: linear-gradient(90deg, transparent, rgba(26,163,232,0.28), transparent); }
+        body:not(.theme-light) .module-card:hover { background: #ffffff; border-color: rgba(26,163,232,0.28); box-shadow: 0 24px 48px rgba(10,77,122,0.14), 0 0 0 1px rgba(26,163,232,0.10); }
+        body:not(.theme-light) .module-card.no-app:hover { background: rgba(255,255,255,0.88) !important; }
+        body:not(.theme-light) .module-card h3 { color: var(--cb-header); }
+        body:not(.theme-light) .module-card p { color: #557084; }
+        body:not(.theme-light) .card-badge-off { background: rgba(10,77,122,0.08); color: rgba(10,77,122,0.45); }
+        body.theme-light.sidebar-collapsed .cat-toggle::after { background: #fff !important; color: var(--cb-header) !important; border-color: rgba(10,77,122,0.12) !important; }
     </style>
 </head>
 <body>
@@ -381,7 +712,9 @@
         </button>
         <div id="logo-area">
             <div class="logo-icon">G</div>
-            <div><h1>Giant.V1</h1></div>
+            <div>
+                <h1>Giant.V1</h1>
+            </div>
         </div>
     </div>
 
@@ -402,11 +735,13 @@
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" stroke-linecap="round" stroke-linejoin="round"/></svg>
             <span>Meeting</span>
         </button>
+
         <div id="zoom-controls">
             <button id="zoom65" data-zoom="super">65%</button>
             <button id="zoom80" data-zoom="compact">80%</button>
             <button id="zoom100" data-zoom="normal" class="active-zoom">100%</button>
         </div>
+
         <button id="theme-toggle" title="เปลี่ยนธีม">
             <svg id="icon-dark" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z" stroke-linecap="round" stroke-linejoin="round"/></svg>
             <svg id="icon-light" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="display:none"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42" stroke-linecap="round"/></svg>
@@ -430,17 +765,24 @@
 
     <div id="sidebar-nav">
 
-        <div class="cat-group" id="cat-general">
+      <div class="cat-group" id="cat-general">
             <button class="cat-toggle" data-tooltip="General">
                 <div class="cat-icon" style="background:linear-gradient(135deg,#64748b,#475569)">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="width:17px;height:17px;"><rect x="3" y="3" width="18" height="18" rx="2"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="9" y1="21" x2="9" y2="9"/></svg>
+                    <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="width:17px;height:17px;"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="9" y1="21" x2="9" y2="9"/></svg>
                 </div>
-                <div class="cat-info"><span class="cat-name">Scanner</span><span class="cat-sub">Web Scanner</span></div>
+                <div class="cat-info">
+                    <span class="cat-name">Scanner</span>
+                    <span class="cat-sub">Web Scanner</span>
+                </div>
                 <svg class="cat-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M19 9l-7 7-7-7" stroke-linecap="round" stroke-linejoin="round"/></svg>
             </button>
             <div class="cat-items">
-                <button class="nav-item" onclick="window.open('https://sites.google.com/giantinterholding.co.th/system/verification','_blank')"><span class="nav-item-dot"></span><span class="nav-item-text">General</span></button>
-                <button class="nav-item" onclick="window.open('https://sites.google.com/giantinterholding.co.th/koitoscanner/koito','_blank')"><span class="nav-item-dot"></span><span class="nav-item-text">Koito</span></button>
+                <button class="nav-item" onclick="window.open('https://sites.google.com/giantinterholding.co.th/system/verification', '_blank')">
+                    <span class="nav-item-dot"></span><span class="nav-item-text">General</span>
+                </button>
+                <button class="nav-item" onclick="window.open('https://sites.google.com/giantinterholding.co.th/koitoscanner/koito', '_blank')">
+                    <span class="nav-item-dot"></span><span class="nav-item-text">Koito</span>
+                </button>
             </div>
         </div>
 
@@ -449,11 +791,16 @@
                 <div class="cat-icon" style="background:linear-gradient(135deg,#6366f1,#4f46e5)">
                     <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="width:17px;height:17px;"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>
                 </div>
-                <div class="cat-info"><span class="cat-name">Sales Co</span><span class="cat-sub">ฝ่ายขาย</span></div>
+                <div class="cat-info">
+                    <span class="cat-name">Sales Co</span>
+                    <span class="cat-sub">ฝ่ายขาย</span>
+                </div>
                 <svg class="cat-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M19 9l-7 7-7-7" stroke-linecap="round" stroke-linejoin="round"/></svg>
             </button>
             <div class="cat-items">
-                <button class="nav-item" data-src="https://script.google.com/macros/s/AKfycbyaqc--KYa7WJJB1RXxPb9rpw_-89zlaCWAvJx0c9rv4MHjC94aYjNBRalu9Xc-iZ7S/exec"><span class="nav-item-dot"></span><span class="nav-item-text">Daily</span></button>
+                <button class="nav-item" data-src="https://script.google.com/macros/s/AKfycbyaqc--KYa7WJJB1RXxPb9rpw_-89zlaCWAvJx0c9rv4MHjC94aYjNBRalu9Xc-iZ7S/exec">
+                    <span class="nav-item-dot"></span><span class="nav-item-text">Daily</span>
+                </button>
             </div>
         </div>
 
@@ -462,7 +809,10 @@
                 <div class="cat-icon" style="background:linear-gradient(135deg,#f97316,#ea580c)">
                     <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="width:17px;height:17px;"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/></svg>
                 </div>
-                <div class="cat-info"><span class="cat-name">Inventory</span><span class="cat-sub">จัดการคลังสินค้า</span></div>
+                <div class="cat-info">
+                    <span class="cat-name">Inventory</span>
+                    <span class="cat-sub">จัดการคลังสินค้า</span>
+                </div>
                 <svg class="cat-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M19 9l-7 7-7-7" stroke-linecap="round" stroke-linejoin="round"/></svg>
             </button>
             <div class="cat-items">
@@ -480,7 +830,10 @@
                 <div class="cat-icon" style="background:linear-gradient(135deg,#3b82f6,#1d4ed8)">
                     <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="width:17px;height:17px;"><rect x="1" y="3" width="15" height="13" rx="2"/><path d="M16 8h4l3 3v5h-7V8z"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>
                 </div>
-                <div class="cat-info"><span class="cat-name">Logistics</span><span class="cat-sub">ระบบขนส่ง</span></div>
+                <div class="cat-info">
+                    <span class="cat-name">Logistics</span>
+                    <span class="cat-sub">ระบบขนส่ง</span>
+                </div>
                 <svg class="cat-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M19 9l-7 7-7-7" stroke-linecap="round" stroke-linejoin="round"/></svg>
             </button>
             <div class="cat-items">
@@ -498,7 +851,10 @@
                 <div class="cat-icon" style="background:linear-gradient(135deg,#10b981,#059669)">
                     <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="width:17px;height:17px;"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
                 </div>
-                <div class="cat-info"><span class="cat-name">Planning</span><span class="cat-sub">วางแผนการผลิต</span></div>
+                <div class="cat-info">
+                    <span class="cat-name">Planning</span>
+                    <span class="cat-sub">วางแผนการผลิต</span>
+                </div>
                 <svg class="cat-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M19 9l-7 7-7-7" stroke-linecap="round" stroke-linejoin="round"/></svg>
             </button>
             <div class="cat-items">
@@ -507,15 +863,27 @@
             </div>
         </div>
 
+        <!-- PRODUCTION: Factory/Machine icon -->
         <div class="cat-group" id="cat-production">
             <button class="cat-toggle" data-tooltip="Production">
                 <div class="cat-icon" style="background:linear-gradient(135deg,#ef4444,#dc2626)">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:17px;height:17px;"><path d="M2 20V11l5 3V11l5 3V8l10 5v7H2z"/><line x1="2" y1="20" x2="22" y2="20"/><rect x="4" y="5" width="2.5" height="6" rx="0.5"/><rect x="8" y="3" width="2.5" height="8" rx="0.5"/><rect x="17" y="15" width="3" height="5" rx="0.5"/></svg>
+                    <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:17px;height:17px;">
+                        <path d="M2 20V11l5 3V11l5 3V8l10 5v7H2z"/>
+                        <line x1="2" y1="20" x2="22" y2="20"/>
+                        <rect x="4" y="5" width="2.5" height="6" rx="0.5"/>
+                        <rect x="8" y="3" width="2.5" height="8" rx="0.5"/>
+                        <rect x="17" y="15" width="3" height="5" rx="0.5"/>
+                    </svg>
                 </div>
-                <div class="cat-info"><span class="cat-name">Production</span><span class="cat-sub">การผลิต</span></div>
+                <div class="cat-info">
+                    <span class="cat-name">Production</span>
+                    <span class="cat-sub">การผลิต</span>
+                </div>
                 <svg class="cat-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M19 9l-7 7-7-7" stroke-linecap="round" stroke-linejoin="round"/></svg>
             </button>
-            <div class="cat-items"><p style="font-size:0.68rem;color:#475569;padding:6px 14px;font-style:italic">ยังไม่มีรายการ</p></div>
+            <div class="cat-items">
+                <p style="font-size:0.68rem;color:#475569;padding:6px 14px;font-style:italic">ยังไม่มีรายการ</p>
+            </div>
         </div>
 
         <div class="cat-group" id="cat-purchasing">
@@ -523,10 +891,15 @@
                 <div class="cat-icon" style="background:linear-gradient(135deg,#a855f7,#7c3aed)">
                     <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="width:17px;height:17px;"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
                 </div>
-                <div class="cat-info"><span class="cat-name">Purchasing</span><span class="cat-sub">จัดซื้อ</span></div>
+                <div class="cat-info">
+                    <span class="cat-name">Purchasing</span>
+                    <span class="cat-sub">จัดซื้อ</span>
+                </div>
                 <svg class="cat-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M19 9l-7 7-7-7" stroke-linecap="round" stroke-linejoin="round"/></svg>
             </button>
-            <div class="cat-items"><p style="font-size:0.68rem;color:#475569;padding:6px 14px;font-style:italic">ยังไม่มีรายการ</p></div>
+            <div class="cat-items">
+                <p style="font-size:0.68rem;color:#475569;padding:6px 14px;font-style:italic">ยังไม่มีรายการ</p>
+            </div>
         </div>
 
         <div class="cat-group" id="cat-it">
@@ -534,7 +907,10 @@
                 <div class="cat-icon" style="background:linear-gradient(135deg,#06b6d4,#0284c7)">
                     <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="width:17px;height:17px;"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
                 </div>
-                <div class="cat-info"><span class="cat-name">IT</span><span class="cat-sub">เทคโนโลยี</span></div>
+                <div class="cat-info">
+                    <span class="cat-name">IT</span>
+                    <span class="cat-sub">เทคโนโลยี</span>
+                </div>
                 <svg class="cat-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M19 9l-7 7-7-7" stroke-linecap="round" stroke-linejoin="round"/></svg>
             </button>
             <div class="cat-items">
@@ -545,30 +921,45 @@
         <div class="cat-group" id="cat-dev-mode">
             <button class="cat-toggle" data-tooltip="Dev Mode">
                 <div class="cat-icon" style="background:linear-gradient(135deg,#a855f7,#ec4899)">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="width:17px;height:17px;"><path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09z"/><path d="M12 15l-3-3a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.35 22.35 0 0 1-4 2z"/></svg>
+                    <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="width:17px;height:17px;"><path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09z"/><path d="M12 15l-3-3a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.35 22.35 0 0 1-4 2z"/><path d="M9 12H4s.55-3.03 2-4c1.62-1.08 5 0 5 0"/><path d="M12 15v5s3.03-.55 4-2c1.08-1.62 0-5 0-5"/></svg>
                 </div>
-                <div class="cat-info"><span class="cat-name">Dev Mode</span><span class="cat-sub">โหมดนักพัฒนา</span></div>
+                <div class="cat-info">
+                    <span class="cat-name">Dev Mode</span>
+                    <span class="cat-sub">โหมดนักพัฒนา</span>
+                </div>
                 <svg class="cat-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M19 9l-7 7-7-7" stroke-linecap="round" stroke-linejoin="round"/></svg>
             </button>
+            <!-- <div class="cat-items">
+                <button class="nav-item" data-src="https://script.google.com/macros/s/AKfycbyaqc--KYa7WJJB1RXxPb9rpw_-89zlaCWAvJx0c9rv4MHjC94aYjNBRalu9Xc-iZ7S/exec"><span class="nav-item-dot"></span><span class="nav-item-text">Dilly Demo</span></button>
+            </div> -->
         </div>
-
+        
         <div class="cat-group" id="cat-maintenance">
             <button class="cat-toggle" data-tooltip="Maintenance">
                 <div class="cat-icon" style="background:linear-gradient(135deg,#6b7280,#4b5563)">
                     <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="width:17px;height:17px;"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>
                 </div>
-                <div class="cat-info"><span class="cat-name">Maintenance</span><span class="cat-sub">บำรุงรักษา</span></div>
+                <div class="cat-info">
+                    <span class="cat-name">Maintenance</span>
+                    <span class="cat-sub">บำรุงรักษา</span>
+                </div>
                 <svg class="cat-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M19 9l-7 7-7-7" stroke-linecap="round" stroke-linejoin="round"/></svg>
             </button>
-            <div class="cat-items"><p style="font-size:0.68rem;color:#475569;padding:6px 14px;font-style:italic">ยังไม่มีรายการ</p></div>
+            <div class="cat-items">
+                <p style="font-size:0.68rem;color:#475569;padding:6px 14px;font-style:italic">ยังไม่มีรายการ</p>
+            </div>
         </div>
+
 
         <div class="cat-group" id="cat-other">
             <button class="cat-toggle" data-tooltip="อื่นๆ" style="background:rgba(234,179,8,0.05);border-radius:10px;">
                 <div class="cat-icon" style="background:linear-gradient(135deg,#eab308,#ca8a04)">
                     <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="width:17px;height:17px;"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
                 </div>
-                <div class="cat-info"><span class="cat-name" style="color:#fde68a">ฟังก์ชันอื่นๆ</span><span class="cat-sub">เครื่องมือเพิ่มเติม</span></div>
+                <div class="cat-info">
+                    <span class="cat-name" style="color:#fde68a">ฟังก์ชันอื่นๆ</span>
+                    <span class="cat-sub">เครื่องมือเพิ่มเติม</span>
+                </div>
                 <svg class="cat-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M19 9l-7 7-7-7" stroke-linecap="round" stroke-linejoin="round"/></svg>
             </button>
             <div class="cat-items">
@@ -579,21 +970,27 @@
         </div>
 
     </div>
+
+    
 </nav>
 
 <main id="main-area">
     <div id="content-area">
-        <div id="main-loader" style="display:none;position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);z-index:5;color:#7bbdd8;align-items:center;flex-direction:column;gap:12px;font-weight:500;">
-            <svg class="animate-spin" width="32" height="32" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg>
-            <span style="font-size:0.85rem;letter-spacing:0.05em;">กำลังโหลดระบบ...</span>
+        <!-- Loading Spinner สำหรับแสดงตอนที่ข้อมูลกำลังโหลดเข้า Iframe ครั้งแรก -->
+        <div id="main-loader" style="display:none; position:absolute; top:50%; left:50%; transform:translate(-50%,-50%); z-index:5; color:#7bbdd8; align-items:center; flex-direction:column; gap:12px; font-weight:500;">
+            <svg class="animate-spin" width="32" height="32" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg>
+            <span style="font-size: 0.85rem; letter-spacing: 0.05em;">กำลังโหลดระบบ...</span>
         </div>
 
         <div id="welcome-slider">
             <div id="slider-wrapper">
+
+                <!-- SLIDE 1 -->
                 <div class="slide slide-1-bg">
                     <div class="flex flex-col items-center justify-center h-full p-6 relative z-10">
                         <div class="text-center w-full max-w-5xl">
-                            <div class="animate-fade-in-up mb-3" style="display:inline-flex;align-items:center;gap:12px;background:rgba(255,255,255,0.12);border:1px solid rgba(255,255,255,0.2);border-radius:40px;padding:6px 18px 6px 14px;backdrop-filter:blur(8px);">
+                            <!-- Real-time Clock -->
+                            <div class="animate-fade-in-up mb-3" id="clock-wrap" style="display:inline-flex;align-items:center;gap:12px;background:rgba(255,255,255,0.12);border:1px solid rgba(255,255,255,0.2);border-radius:40px;padding:6px 18px 6px 14px;backdrop-filter:blur(8px);">
                                 <span style="width:7px;height:7px;border-radius:50%;background:#4ade80;display:inline-block;box-shadow:0 0 0 3px rgba(74,222,128,0.25);flex-shrink:0;"></span>
                                 <span id="live-date" style="font-size:0.75rem;font-weight:500;color:rgba(255,255,255,0.85);white-space:nowrap;"></span>
                                 <span style="color:rgba(255,255,255,0.3);font-size:0.7rem;">·</span>
@@ -601,53 +998,109 @@
                             </div>
                             <h2 class="text-4xl md:text-5xl font-bold mb-3 animate-fade-in-up delay-100" style="color:#fff;text-shadow:0 2px 20px rgba(8,57,94,0.4);line-height:1.15">Welcome to<br>Giantinterholding</h2>
 
+
                             <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mt-4">
+
                                 <div class="module-card animate-fade-in-up delay-200" data-src="https://script.google.com/a/macros/giantinterholding.co.th/s/AKfycbyhyjPm9GM7yvRvpWsTCnHgo6ZM7RUu2LJ6oP1Q_rEODLYx8-OQhSB6ruJly2y8KzsY/exec">
-                                    <div class="module-icon-wrap" style="background:linear-gradient(135deg,#f97316,#ea580c)"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:28px;height:28px;"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/></svg></div>
-                                    <h3>Inventory</h3><p>จัดการคลังสินค้า</p><span class="card-badge card-badge-on">● ACTIVE</span>
+                                    <div class="module-icon-wrap" style="background:linear-gradient(135deg,#f97316,#ea580c)">
+                                        <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:28px;height:28px;"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/></svg>
+                                    </div>
+                                    <h3>Inventory</h3>
+                                    <p>จัดการคลังสินค้า</p>
+                                    <span class="card-badge card-badge-on">● ACTIVE</span>
                                 </div>
+
                                 <div class="module-card animate-fade-in-up delay-300" data-src="https://script.google.com/macros/s/AKfycbysx4374HDQyZux-RLDtb5BAjCTSV5kjuafqFXZa6lHQxtv2duFtwbQiT6nSTKVWGOnaw/exec">
-                                    <div class="module-icon-wrap" style="background:linear-gradient(135deg,#3b82f6,#1d4ed8)"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:28px;height:28px;"><rect x="1" y="3" width="15" height="13" rx="2"/><path d="M16 8h4l3 3v5h-7V8z"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg></div>
-                                    <h3>Logistics</h3><p>ระบบขนส่ง</p><span class="card-badge card-badge-on">● ACTIVE</span>
+                                    <div class="module-icon-wrap" style="background:linear-gradient(135deg,#3b82f6,#1d4ed8)">
+                                        <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:28px;height:28px;"><rect x="1" y="3" width="15" height="13" rx="2"/><path d="M16 8h4l3 3v5h-7V8z"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>
+                                    </div>
+                                    <h3>Logistics</h3>
+                                    <p>ระบบขนส่ง</p>
+                                    <span class="card-badge card-badge-on">● ACTIVE</span>
                                 </div>
+
                                 <div class="module-card animate-fade-in-up delay-400" data-src="https://script.google.com/macros/s/AKfycbz-yW7ey5rBp93JmpXGV2AzSZIhvTM2vPM40GPak20tE3D9tpIRQbA9gjrnHs9j9vg62A/exec">
-                                    <div class="module-icon-wrap" style="background:linear-gradient(135deg,#10b981,#059669)"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:28px;height:28px;"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg></div>
-                                    <h3>Planning</h3><p>วางแผนการผลิต</p><span class="card-badge card-badge-on">● ACTIVE</span>
+                                    <div class="module-icon-wrap" style="background:linear-gradient(135deg,#10b981,#059669)">
+                                        <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:28px;height:28px;"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+                                    </div>
+                                    <h3>Planning</h3>
+                                    <p>วางแผนการผลิต</p>
+                                    <span class="card-badge card-badge-on">● ACTIVE</span>
                                 </div>
+
                                 <div class="module-card no-app animate-fade-in-up delay-500">
-                                    <div class="module-icon-wrap" style="background:linear-gradient(135deg,#ef4444,#dc2626)"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="width:28px;height:28px;"><path d="M2 20V11l5 3V11l5 3V8l10 5v7H2z"/><line x1="2" y1="20" x2="22" y2="20"/><rect x="4" y="5" width="2.5" height="6" rx="0.5"/><rect x="8" y="3" width="2.5" height="8" rx="0.5"/><rect x="17" y="15" width="3" height="5" rx="0.5"/></svg></div>
-                                    <h3>Production</h3><p>การผลิต</p><span class="card-badge card-badge-off">COMING SOON</span>
+                                    <div class="module-icon-wrap" style="background:linear-gradient(135deg,#ef4444,#dc2626)">
+                                        <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="width:28px;height:28px;">
+                                            <path d="M2 20V11l5 3V11l5 3V8l10 5v7H2z"/>
+                                            <line x1="2" y1="20" x2="22" y2="20"/>
+                                            <rect x="4" y="5" width="2.5" height="6" rx="0.5"/>
+                                            <rect x="8" y="3" width="2.5" height="8" rx="0.5"/>
+                                            <rect x="17" y="15" width="3" height="5" rx="0.5"/>
+                                        </svg>
+                                    </div>
+                                    <h3>Production</h3>
+                                    <p>การผลิต</p>
+                                    <span class="card-badge card-badge-off">COMING SOON</span>
                                 </div>
+
                                 <div class="module-card no-app animate-fade-in-up delay-600">
-                                    <div class="module-icon-wrap" style="background:linear-gradient(135deg,#6b7280,#4b5563)"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:28px;height:28px;"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg></div>
-                                    <h3>Maintenance</h3><p>บำรุงรักษา</p><span class="card-badge card-badge-off">COMING SOON</span>
+                                    <div class="module-icon-wrap" style="background:linear-gradient(135deg,#6b7280,#4b5563)">
+                                        <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:28px;height:28px;"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>
+                                    </div>
+                                    <h3>Maintenance</h3>
+                                    <p>บำรุงรักษา</p>
+                                    <span class="card-badge card-badge-off">COMING SOON</span>
                                 </div>
-                                <div class="module-card animate-fade-in-up delay-700" data-src="https://script.google.com/a/macros/giantinterholding.co.th/s/AKfycbyfFgpW8xn2-l4_ieFD1Hn4gZCIuppTVUGxRA27-u5DKEgkUh69x6uLfVMN3tnC4zQp/exec">
-                                    <div class="module-icon-wrap" style="background:linear-gradient(135deg,#6366f1,#4f46e5)"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:28px;height:28px;"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg></div>
-                                    <h3>Sales Co</h3><p>ฝ่ายขาย</p><span class="card-badge card-badge-on">● ACTIVE</span>
+
+                                <div class="module-card animate-fade-in-up delay-700" data-src="https://script.google.com/macros/s/AKfycbyaqc--KYa7WJJB1RXxPb9rpw_-89zlaCWAvJx0c9rv4MHjC94aYjNBRalu9Xc-iZ7S/exec">
+                                    <div class="module-icon-wrap" style="background:linear-gradient(135deg,#6366f1,#4f46e5)">
+                                        <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:28px;height:28px;"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>
+                                    </div>
+                                    <h3>Sales Co</h3>
+                                    <p>ฝ่ายขาย</p>
+                                    <span class="card-badge card-badge-on">● ACTIVE</span>
                                 </div>
+
                                 <div class="module-card no-app animate-fade-in-up delay-800">
-                                    <div class="module-icon-wrap" style="background:linear-gradient(135deg,#a855f7,#7c3aed)"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:28px;height:28px;"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg></div>
-                                    <h3>Purchasing</h3><p>จัดซื้อ</p><span class="card-badge card-badge-off">COMING SOON</span>
+                                    <div class="module-icon-wrap" style="background:linear-gradient(135deg,#a855f7,#7c3aed)">
+                                        <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:28px;height:28px;"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
+                                    </div>
+                                    <h3>Purchasing</h3>
+                                    <p>จัดซื้อ</p>
+                                    <span class="card-badge card-badge-off">COMING SOON</span>
                                 </div>
+
                                 <div class="module-card animate-fade-in-up delay-800" data-src="https://script.google.com/macros/s/AKfycbwgmdZvcWKjw5LUccPyWrPuaSF-wslbJqBLXV8SbRCCYmooHlkqnaaUn8cGFdxuN8Vysw/exec">
-                                    <div class="module-icon-wrap" style="background:linear-gradient(135deg,#06b6d4,#0284c7)"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:28px;height:28px;"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg></div>
-                                    <h3>IT</h3><p>เทคโนโลยี</p><span class="card-badge card-badge-on">● ACTIVE</span>
+                                    <div class="module-icon-wrap" style="background:linear-gradient(135deg,#06b6d4,#0284c7)">
+                                        <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:28px;height:28px;"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+                                    </div>
+                                    <h3>IT</h3>
+                                    <p>เทคโนโลยี</p>
+                                    <span class="card-badge card-badge-on">● ACTIVE</span>
                                 </div>
+
                             </div>
                         </div>
                     </div>
                 </div>
+
+
+
             </div>
+
+
         </div>
     </div>
 </main>
+
+
 
 <div id="toast">
     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round"/></svg>
     ข้อมูลอัพเดทเป็นปัจจุบันแล้ว
 </div>
 
+<!-- Modals -->
 <div id="manager-modal" class="full-modal hidden">
     <div class="modal-inner">
         <div class="modal-topbar" style="background:linear-gradient(135deg,#7c3aed,#4f46e5)">
@@ -667,92 +1120,178 @@
     </div>
 </div>
 
+
 <script>
 document.addEventListener('DOMContentLoaded', function() {
     var IS_MOBILE = function() { return window.innerWidth < 768; };
+
+    // Sidebar
     var sidebarToggle = document.getElementById('sidebar-toggle');
+    var sidebar = document.getElementById('sidebar');
     var backdrop = document.getElementById('sidebar-backdrop');
     var mainArea = document.getElementById('main-area');
 
     function openSidebar() {
-        if (IS_MOBILE()) { document.body.classList.add('sidebar-open'); document.body.classList.remove('sidebar-collapsed'); }
-        else { document.body.classList.remove('sidebar-collapsed'); mainArea.style.marginLeft = 'var(--sidebar-width)'; }
+        if (IS_MOBILE()) {
+            document.body.classList.add('sidebar-open');
+            document.body.classList.remove('sidebar-collapsed');
+        } else {
+            document.body.classList.remove('sidebar-collapsed');
+            mainArea.style.marginLeft = 'var(--sidebar-width)';
+        }
     }
     function closeSidebar() {
-        if (IS_MOBILE()) { document.body.classList.remove('sidebar-open'); }
-        else { document.body.classList.add('sidebar-collapsed'); mainArea.style.marginLeft = 'var(--sidebar-collapsed-width)'; }
+        if (IS_MOBILE()) {
+            document.body.classList.remove('sidebar-open');
+        } else {
+            document.body.classList.add('sidebar-collapsed');
+            mainArea.style.marginLeft = 'var(--sidebar-collapsed-width)';
+        }
     }
     function isSidebarVisible() {
         if (IS_MOBILE()) return document.body.classList.contains('sidebar-open');
         return !document.body.classList.contains('sidebar-collapsed');
     }
-    sidebarToggle.addEventListener('click', function() { if (isSidebarVisible()) closeSidebar(); else openSidebar(); });
+    sidebarToggle.addEventListener('click', function() {
+        if (isSidebarVisible()) closeSidebar(); else openSidebar();
+    });
     backdrop.addEventListener('click', closeSidebar);
-    if (!IS_MOBILE()) { mainArea.style.marginLeft = 'var(--sidebar-width)'; }
+    if (!IS_MOBILE()) {
+        document.body.classList.remove('sidebar-collapsed');
+        mainArea.style.marginLeft = 'var(--sidebar-width)';
+    } else {
+        mainArea.style.marginLeft = '0';
+    }
     window.addEventListener('resize', function() {
-        if (!IS_MOBILE()) { document.body.classList.remove('sidebar-open'); mainArea.style.marginLeft = document.body.classList.contains('sidebar-collapsed') ? 'var(--sidebar-collapsed-width)' : 'var(--sidebar-width)'; }
-        else { mainArea.style.marginLeft = '0'; }
+        if (!IS_MOBILE()) {
+            document.body.classList.remove('sidebar-open');
+            mainArea.style.marginLeft = document.body.classList.contains('sidebar-collapsed') ? 'var(--sidebar-collapsed-width)' : 'var(--sidebar-width)';
+        } else {
+            mainArea.style.marginLeft = '0';
+        }
     });
 
+    // Category toggles
     document.querySelectorAll('.cat-toggle').forEach(function(toggle) {
         toggle.addEventListener('click', function() {
             var group = toggle.closest('.cat-group');
-            var isClosing = group.classList.contains('open');
+            var isClosing = group.classList.contains('open'); 
             group.classList.toggle('open');
+
+            // ✅ ลบหน้าเว็บ (Iframe) ทิ้งเมื่อมีการปิดเมนู Logistics หรือ อื่นๆ เพื่อประหยัด RAM
             if (isClosing && (group.id === 'cat-logistics' || group.id === 'cat-other')) {
                 var buttons = group.querySelectorAll('.nav-item[data-src]');
                 var activeRemoved = false;
+
                 buttons.forEach(function(btn) {
                     var src = btn.dataset.src;
                     if (src && iframeCache[src]) {
-                        if (iframeCache[src].classList.contains('visible')) activeRemoved = true;
-                        iframeCache[src].remove(); delete iframeCache[src]; btn.classList.remove('active');
+                        if (iframeCache[src].classList.contains('visible')) {
+                            activeRemoved = true;
+                        }
+                        iframeCache[src].remove();
+                        delete iframeCache[src];
+                        btn.classList.remove('active');
                     }
                 });
-                if (activeRemoved) resetToWelcome();
+
+                if (activeRemoved) {
+                    resetToWelcome();
+                }
             }
         });
     });
 
+    // iframe cache
     var contentArea = document.getElementById('content-area');
     var welcomeSlider = document.getElementById('welcome-slider');
     var iframeCache = {};
     var BOOKING_SRC = 'https://script.google.com/a/macros/giantinterholding.co.th/s/AKfycbzx1grDDBJWrDTth0rD4KEPRqMf4_djzsRg5rj1K9iZjRYfmOLB5fHNFzczcEQYZnz-lw/exec';
     var bookingBtn = document.getElementById('booking-btn');
 
+    function preloadFrames() {
+        document.querySelectorAll('.nav-item[data-src]').forEach(function(btn) {
+            // ✅ ยกเว้น Logistics, IT, Dev Mode, Historical Data และ ใบเบิก (โหลดเฉพาะตอนคลิก)
+            if (
+                btn.closest('#cat-logistics') || 
+                btn.closest('#cat-it') || 
+                btn.closest('#cat-dev-mode') || 
+                btn.textContent.includes('Historical Data') ||
+                btn.textContent.includes('ใบเบิก')
+            ) return;
+
+            var src = btn.dataset.src;
+            if (src && !iframeCache[src]) {
+                var iframe = document.createElement('iframe');
+                iframe.className = 'app-iframe';
+                iframe.src = src;
+                contentArea.appendChild(iframe);
+                iframeCache[src] = iframe;
+            }
+        });
+    }
+
     function stopBookingFrame() {
-        if (iframeCache[BOOKING_SRC]) { iframeCache[BOOKING_SRC].remove(); delete iframeCache[BOOKING_SRC]; }
+        if (iframeCache[BOOKING_SRC]) {
+            iframeCache[BOOKING_SRC].remove();
+            delete iframeCache[BOOKING_SRC];
+        }
         if (bookingBtn) bookingBtn.classList.remove('active-btn');
     }
-    function clearHeaderActive() {
-        ['booking-btn','manager-btn','meeting-btn'].forEach(function(id) { var el = document.getElementById(id); if (el) el.classList.remove('active-btn'); });
-    }
+
     function showWelcomeState() {
         welcomeSlider.style.display = 'block';
         Object.values(iframeCache).forEach(function(f) { f.classList.remove('visible'); });
         document.querySelectorAll('.nav-item').forEach(function(b) { b.classList.remove('active'); });
         clearHeaderActive();
     }
+
     function showFrame(src) {
         if (src !== BOOKING_SRC) stopBookingFrame();
         welcomeSlider.style.display = 'none';
         Object.values(iframeCache).forEach(function(f) { f.classList.remove('visible'); });
+        
         var loader = document.getElementById('main-loader');
+
+        // ✅ Lazy Load: ดึงข้อมูลตอนคลิกสำหรับหน้าที่ไม่ได้โหลดรอไว้
         if (!iframeCache[src]) {
-            if (loader) loader.style.display = 'flex';
+            if(loader) loader.style.display = 'flex'; // แสดงโหลด
+
             var iframe = document.createElement('iframe');
-            iframe.className = 'app-iframe'; iframe.src = src;
-            iframe.onload = function() { if (loader) loader.style.display = 'none'; };
-            contentArea.appendChild(iframe); iframeCache[src] = iframe;
-        } else { if (loader) loader.style.display = 'none'; }
+            iframe.className = 'app-iframe';
+            iframe.src = src;
+            iframe.onload = function() {
+                if(loader) loader.style.display = 'none'; // ซ่อนหน้าโหลดเมื่อหน้าเว็บดึงมาเสร็จ
+            };
+            contentArea.appendChild(iframe);
+            iframeCache[src] = iframe;
+        } else {
+            if(loader) loader.style.display = 'none';
+        }
+
         iframeCache[src].classList.add('visible');
     }
-    function resetToWelcome() { stopBookingFrame(); showWelcomeState(); showToast(); }
+
+    function clearHeaderActive() {
+        ['booking-btn','manager-btn','meeting-btn'].forEach(function(id) {
+            var el = document.getElementById(id);
+            if (el) el.classList.remove('active-btn');
+        });
+    }
+
+    function resetToWelcome() {
+        stopBookingFrame();
+        showWelcomeState();
+        preloadFrames();
+        showToast();
+    }
 
     document.querySelectorAll('.nav-item[data-src]').forEach(function(btn) {
         btn.addEventListener('click', function() {
             document.querySelectorAll('.nav-item').forEach(function(b) { b.classList.remove('active'); });
-            btn.classList.add('active'); clearHeaderActive(); showFrame(btn.dataset.src);
+            btn.classList.add('active');
+            clearHeaderActive();
+            showFrame(btn.dataset.src);
             if (IS_MOBILE()) closeSidebar();
         });
     });
@@ -760,22 +1299,33 @@ document.addEventListener('DOMContentLoaded', function() {
     document.getElementById('refresh-btn').addEventListener('click', resetToWelcome);
 
     function showToast() {
-        var t = document.getElementById('toast'); t.classList.add('show');
+        var t = document.getElementById('toast');
+        t.classList.add('show');
         setTimeout(function() { t.classList.remove('show'); }, 2800);
     }
 
-    function applyZoom(zoomType) {
-        document.querySelectorAll('#zoom-controls button').forEach(function(b) { b.classList.remove('active-zoom'); });
-        var btn = document.querySelector('#zoom-controls button[data-zoom="' + zoomType + '"]');
-        if (btn) btn.classList.add('active-zoom');
-        document.body.style.zoom = zoomType === 'super' ? '0.65' : zoomType === 'compact' ? '0.8' : '1';
-    }
-    document.querySelectorAll('#zoom-controls button').forEach(function(btn) {
-        btn.addEventListener('click', function() { applyZoom(btn.dataset.zoom); });
-    });
-    applyZoom('compact');
 
-    document.getElementById('fullscreen-btn').addEventListener('click', function() {
+
+   // Zoom
+function applyZoom(zoomType) {
+    document.querySelectorAll('#zoom-controls button').forEach(function(b) { b.classList.remove('active-zoom'); });
+    var btn = document.querySelector('#zoom-controls button[data-zoom="' + zoomType + '"]');
+    if (btn) btn.classList.add('active-zoom');
+    document.body.style.zoom = zoomType === 'super' ? '0.65' : zoomType === 'compact' ? '0.8' : '1';
+}
+
+document.querySelectorAll('#zoom-controls button').forEach(function(btn) {
+    btn.addEventListener('click', function() {
+        applyZoom(btn.dataset.zoom);
+    });
+});
+
+// ✅ ตั้ง default 80% ทุกครั้งที่โหลดหน้า
+applyZoom('compact');
+
+    // Fullscreen
+    var fsBtn = document.getElementById('fullscreen-btn');
+    fsBtn.addEventListener('click', function() {
         if (!document.fullscreenElement) document.documentElement.requestFullscreen();
         else document.exitFullscreen();
     });
@@ -786,78 +1336,115 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 
     function getActiveZoomType() {
-        var z = document.querySelector('#zoom-controls button.active-zoom');
-        return z ? z.dataset.zoom : 'compact';
+        var activeZoom = document.querySelector('#zoom-controls button.active-zoom');
+        return activeZoom ? activeZoom.dataset.zoom : 'compact';
     }
 
+    // Modals
     function setupModal(openBtnId, modalId, closeBtnId) {
         var modal = document.getElementById(modalId);
         var openBtn = document.getElementById(openBtnId);
         var closeBtn = document.getElementById(closeBtnId);
         var previousZoom = null;
         if (!modal) return;
+
         function closeModal() {
             modal.classList.add('hidden');
             if (openBtn) openBtn.classList.remove('active-btn');
-            if (previousZoom) { applyZoom(previousZoom); previousZoom = null; }
+            if (previousZoom) {
+                applyZoom(previousZoom);
+                previousZoom = null;
+            }
         }
+
         if (openBtn) openBtn.addEventListener('click', function() {
             var wasBookingOpen = !!iframeCache[BOOKING_SRC] && iframeCache[BOOKING_SRC].classList.contains('visible');
-            stopBookingFrame(); if (wasBookingOpen) showWelcomeState();
-            previousZoom = getActiveZoomType(); applyZoom('normal');
-            clearHeaderActive(); openBtn.classList.add('active-btn'); modal.classList.remove('hidden');
+            stopBookingFrame();
+            if (wasBookingOpen) showWelcomeState();
+            previousZoom = getActiveZoomType();
+            applyZoom('normal');
+            clearHeaderActive();
+            openBtn.classList.add('active-btn');
+            modal.classList.remove('hidden');
         });
         if (closeBtn) closeBtn.addEventListener('click', closeModal);
-        modal.addEventListener('click', function(e) { if (e.target === modal) closeModal(); });
+        modal.addEventListener('click', function(e) {
+            if (e.target === modal) closeModal();
+        });
     }
     setupModal('manager-btn', 'manager-modal', 'close-manager-modal-btn');
     setupModal('meeting-btn', 'meeting-modal', 'close-meeting-modal-btn');
 
+    // Booking
     bookingBtn.addEventListener('click', function() {
         var loader = document.getElementById('main-loader');
         if (loader) loader.style.display = 'none';
         document.querySelectorAll('.nav-item').forEach(function(b) { b.classList.remove('active'); });
-        clearHeaderActive(); bookingBtn.classList.add('active-btn');
+        clearHeaderActive();
+        bookingBtn.classList.add('active-btn');
         welcomeSlider.style.display = 'none';
         Object.values(iframeCache).forEach(function(f) { f.classList.remove('visible'); });
         if (!iframeCache[BOOKING_SRC]) {
             var iframe = document.createElement('iframe');
-            iframe.className = 'app-iframe'; iframe.src = BOOKING_SRC;
-            contentArea.appendChild(iframe); iframeCache[BOOKING_SRC] = iframe;
+            iframe.className = 'app-iframe';
+            iframe.src = BOOKING_SRC;
+            contentArea.appendChild(iframe);
+            iframeCache[BOOKING_SRC] = iframe;
         }
         iframeCache[BOOKING_SRC].classList.add('visible');
         if (IS_MOBILE()) closeSidebar();
     });
 
+    // Theme
     var themeToggle = document.getElementById('theme-toggle');
     var iconDark = document.getElementById('icon-dark');
     var iconLight = document.getElementById('icon-light');
     var THEME_KEY = 'gih-theme';
+
     function applyTheme(theme) {
-        if (theme === 'light') { document.body.classList.add('theme-light'); iconDark.style.display = 'none'; iconLight.style.display = 'block'; }
-        else { document.body.classList.remove('theme-light'); iconDark.style.display = 'block'; iconLight.style.display = 'none'; }
+        if (theme === 'light') {
+            document.body.classList.add('theme-light');
+            iconDark.style.display = 'none';
+            iconLight.style.display = 'block';
+            themeToggle.title = 'เปลี่ยนเป็นธีมเข้ม';
+        } else {
+            document.body.classList.remove('theme-light');
+            iconDark.style.display = 'block';
+            iconLight.style.display = 'none';
+            themeToggle.title = 'เปลี่ยนเป็นธีมสว่าง';
+        }
         localStorage.setItem(THEME_KEY, theme);
     }
-    themeToggle.addEventListener('click', function() { applyTheme(document.body.classList.contains('theme-light') ? 'dark' : 'light'); });
+    themeToggle.addEventListener('click', function() {
+        applyTheme(document.body.classList.contains('theme-light') ? 'dark' : 'light');
+    });
     applyTheme(localStorage.getItem(THEME_KEY) || 'dark');
 
+    // ─── Real-time Clock ───
     var DAYS_TH = ['อาทิตย์','จันทร์','อังคาร','พุธ','พฤหัสบดี','ศุกร์','เสาร์'];
     var MONTHS_TH = ['ม.ค.','ก.พ.','มี.ค.','เม.ย.','พ.ค.','มิ.ย.','ก.ค.','ส.ค.','ก.ย.','ต.ค.','พ.ย.','ธ.ค.'];
     function updateClock() {
         var now = new Date();
-        var d = document.getElementById('live-date'); var t = document.getElementById('live-time');
-        if (d) d.textContent = DAYS_TH[now.getDay()] + ' ' + now.getDate() + ' ' + MONTHS_TH[now.getMonth()] + ' ' + (now.getFullYear() + 543);
-        if (t) t.textContent = String(now.getHours()).padStart(2,'0') + ':' + String(now.getMinutes()).padStart(2,'0') + ':' + String(now.getSeconds()).padStart(2,'0');
+        var dateEl = document.getElementById('live-date');
+        var timeEl = document.getElementById('live-time');
+        if (dateEl) dateEl.textContent = DAYS_TH[now.getDay()] + ' ' + now.getDate() + ' ' + MONTHS_TH[now.getMonth()] + ' ' + (now.getFullYear() + 543);
+        if (timeEl) timeEl.textContent = String(now.getHours()).padStart(2,'0') + ':' + String(now.getMinutes()).padStart(2,'0') + ':' + String(now.getSeconds()).padStart(2,'0');
     }
-    updateClock(); setInterval(updateClock, 1000);
+    updateClock();
+    setInterval(updateClock, 1000);
 
+    // ─── Module Card click ───
     document.querySelectorAll('.module-card[data-src]').forEach(function(card) {
         card.addEventListener('click', function() {
             document.querySelectorAll('.nav-item').forEach(function(b) { b.classList.remove('active'); });
-            clearHeaderActive(); showFrame(card.dataset.src);
+            clearHeaderActive();
+            showFrame(card.dataset.src);
         });
     });
+
+    preloadFrames();
 });
 </script>
 </body>
 </html>
+
