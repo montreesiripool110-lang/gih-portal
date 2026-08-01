@@ -23,6 +23,8 @@
             --cb-bg:      #e8f6fd;
             --cb-muted:   #7bbdd8;
             --cb-border:  rgba(255,255,255,0.08);
+            --nav-accent: #ff9800;
+            --nav-accent-light: #ffb74d;
             --bg-sidebar: var(--cb-sidebar);
             --bg-sidebar-hover: rgba(77,195,247,0.15);
             --accent: var(--cb-accent);
@@ -106,12 +108,16 @@
 
         #logo-area { display: flex; align-items: center; gap: 8px; }
         #logo-area .logo-icon {
-            width: 32px; height: 32px;
+            width: auto;             /* เปลี่ยนจาก 32px เป็น auto ให้ขยายตามข้อความ */
+            min-width: 32px;         /* บังคับให้กว้างขั้นต่ำ 32px (กรณีชื่อสั้นมากจะได้ยังดูเป็นสี่เหลี่ยมสวยงาม) */
+            padding: 0 10px;         /* เพิ่มพื้นที่ว่างซ้ายขวาให้ข้อความไม่ชนขอบ */
+            height: 32px;
             background: linear-gradient(135deg, #3b82f6, #6366f1);
             border-radius: 9px;
             display: flex; align-items: center; justify-content: center;
             box-shadow: 0 2px 8px rgba(99,102,241,0.45), 0 0 0 1px rgba(255,255,255,0.1);
             font-size: 1.1rem; font-weight: 800; color: #fff; letter-spacing: -0.02em;
+            white-space: nowrap;     /* ป้องกันไม่ให้ข้อความตกบรรทัด */
         }
         #logo-area h1 { font-size: 1rem; font-weight: 700; color: #ffffff; margin: 0; letter-spacing: -0.02em; }
         #logo-area span { font-size: 0.65rem; font-weight: 400; color: var(--cb-pale); display: block; margin-top: -2px; }
@@ -290,11 +296,15 @@
             background: transparent;
             cursor: pointer;
             border-radius: 10px;
-            transition: background 0.2s;
+            transition: background 0.2s, box-shadow 0.2s;
             position: relative;
             overflow: hidden;
         }
-        .cat-toggle:hover { background: rgba(255,255,255,0.06); }
+        .cat-toggle:hover,
+        .cat-group:has(.nav-item.active) > .cat-toggle {
+            background: linear-gradient(135deg, rgba(255,152,0,0.18), rgba(255,183,77,0.08)) !important;
+            box-shadow: inset 0 0 0 1px rgba(255,152,0,0.35), 0 3px 14px rgba(255,152,0,0.12);
+        }
 
         .cat-icon {
             width: 32px; height: 32px;
@@ -326,6 +336,12 @@
         .cat-info .cat-sub { font-size: 0.63rem; font-weight: 400; color: var(--text-muted); white-space: nowrap; }
         .cat-arrow { width: 16px; height: 16px; color: var(--text-muted); flex-shrink: 0; transition: transform 0.25s ease, opacity var(--transition); }
         .cat-group.open .cat-arrow { transform: rotate(180deg); }
+        .cat-toggle:hover .cat-arrow,
+        .cat-group:has(.nav-item.active) > .cat-toggle .cat-arrow { color: var(--nav-accent); }
+        .cat-toggle:hover .cat-info .cat-name,
+        .cat-toggle:hover .cat-info .cat-sub,
+        .cat-group:has(.nav-item.active) > .cat-toggle .cat-info .cat-name,
+        .cat-group:has(.nav-item.active) > .cat-toggle .cat-info .cat-sub { color: #ffffff; }
         body.sidebar-collapsed .cat-info, body.sidebar-collapsed .cat-arrow { opacity: 0; width: 0; }
 
         .cat-items { overflow: hidden; max-height: 0; transition: max-height 0.35s ease; padding-left: 6px; }
@@ -345,24 +361,24 @@
             position: relative;
         }
         .nav-item:hover {
-            background: linear-gradient(135deg, rgba(77,195,247,0.1), rgba(26,163,232,0.06));
-            border-color: rgba(77,195,247,0.2);
-            box-shadow: 0 2px 12px rgba(0,0,0,0.2), inset 0 1px 0 rgba(255,255,255,0.05);
+            background: linear-gradient(135deg, rgba(255,152,0,0.16), rgba(255,183,77,0.08));
+            border-color: rgba(255,152,0,0.38);
+            box-shadow: 0 2px 12px rgba(0,0,0,0.2), inset 0 1px 0 rgba(255,183,77,0.12);
             transform: translateX(3px);
         }
         .nav-item.active {
-            background: linear-gradient(135deg, rgba(77,195,247,0.18), rgba(26,163,232,0.1));
-            border-color: rgba(77,195,247,0.28);
-            box-shadow: 0 2px 16px rgba(26,163,232,0.15);
+            background: linear-gradient(135deg, rgba(255,152,0,0.24), rgba(255,183,77,0.12));
+            border-color: rgba(255,152,0,0.55);
+            box-shadow: 0 2px 16px rgba(255,152,0,0.2);
         }
         .nav-item.active::before {
             content: '';
             position: absolute;
             left: 0; top: 20%; bottom: 20%;
             width: 3px;
-            background: linear-gradient(180deg, var(--cb-light), var(--cb-accent));
+            background: linear-gradient(180deg, var(--nav-accent-light), var(--nav-accent));
             border-radius: 0 3px 3px 0;
-            box-shadow: 0 0 6px rgba(77,195,247,0.6);
+            box-shadow: 0 0 6px rgba(255,152,0,0.65);
         }
         .nav-item-dot {
             width: 5px; height: 5px;
@@ -372,16 +388,16 @@
             margin-left: 5px;
             transition: all 0.2s;
         }
-        .nav-item:hover .nav-item-dot { background: #60a5fa; box-shadow: 0 0 6px rgba(96,165,250,0.7); transform: scale(1.3); }
-        .nav-item.active .nav-item-dot { background: var(--cb-light); box-shadow: 0 0 5px rgba(77,195,247,0.6); }
+        .nav-item:hover .nav-item-dot { background: var(--nav-accent); box-shadow: 0 0 6px rgba(255,152,0,0.7); transform: scale(1.3); }
+        .nav-item.active .nav-item-dot { background: var(--nav-accent); box-shadow: 0 0 5px rgba(255,152,0,0.65); }
         .nav-item-text {
             font-size: 0.75rem; font-weight: 400;
             color: rgba(148,163,184,0.9);
             text-align: left; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
             transition: color 0.2s, opacity var(--transition);
         }
-        .nav-item:hover .nav-item-text { color: #e2e8f0; font-weight: 500; }
-        .nav-item.active .nav-item-text { color: #bfdbfe; font-weight: 500; }
+        .nav-item:hover .nav-item-text { color: #ffffff; font-weight: 500; }
+        .nav-item.active .nav-item-text { color: #ffffff; font-weight: 500; }
         body.sidebar-collapsed .nav-item-dot, body.sidebar-collapsed .nav-item-text { opacity: 0; }
 
         /* Tooltip */
@@ -672,15 +688,26 @@
         body.theme-light .cat-info .cat-name { color: var(--cb-header) !important; }
         body.theme-light .cat-info .cat-sub { color: var(--cb-muted) !important; }
         body.theme-light .cat-arrow { color: var(--cb-muted) !important; }
-        body.theme-light .cat-toggle:hover { background: var(--cb-bg) !important; }
+        body.theme-light .cat-toggle:hover,
+        body.theme-light .cat-group:has(.nav-item.active) > .cat-toggle {
+            background: rgba(255,152,0,0.12) !important;
+            box-shadow: inset 0 0 0 1px rgba(255,152,0,0.38), 0 3px 14px rgba(255,152,0,0.1) !important;
+        }
+        body.theme-light .cat-toggle:hover .cat-info .cat-name,
+        body.theme-light .cat-group:has(.nav-item.active) > .cat-toggle .cat-info .cat-name { color: #000000 !important; }
+        body.theme-light .cat-toggle:hover .cat-info .cat-sub,
+        body.theme-light .cat-group:has(.nav-item.active) > .cat-toggle .cat-info .cat-sub { color: #000000 !important; }
+        body.theme-light .cat-toggle:hover .cat-arrow,
+        body.theme-light .cat-group:has(.nav-item.active) > .cat-toggle .cat-arrow { color: var(--nav-accent) !important; }
         body.theme-light .nav-item-text { color: #4a6070 !important; }
-        body.theme-light .nav-item:hover { background: var(--cb-bg) !important; border-color: rgba(10,77,122,0.12) !important; box-shadow: none !important; }
-        body.theme-light .nav-item:hover .nav-item-text { color: var(--cb-header) !important; }
-        body.theme-light .nav-item:hover .nav-item-dot { background: var(--cb-accent) !important; box-shadow: none !important; }
-        body.theme-light .nav-item.active { background: var(--cb-bg) !important; border-color: rgba(26,163,232,0.28) !important; }
-        body.theme-light .nav-item.active .nav-item-text { color: var(--cb-header) !important; }
+        body.theme-light .nav-item:hover { background: rgba(255,152,0,0.1) !important; border-color: rgba(255,152,0,0.35) !important; box-shadow: 0 2px 10px rgba(255,152,0,0.08) !important; }
+        body.theme-light .nav-item:hover .nav-item-text { color: #000000 !important; }
+        body.theme-light .nav-item:hover .nav-item-dot { background: var(--nav-accent) !important; box-shadow: 0 0 5px rgba(255,152,0,0.45) !important; }
+        body.theme-light .nav-item.active { background: rgba(255,152,0,0.16) !important; border-color: rgba(255,152,0,0.55) !important; box-shadow: 0 2px 12px rgba(255,152,0,0.1) !important; }
+        body.theme-light .nav-item.active .nav-item-text { color: #000000 !important; }
+        body.theme-light .nav-item.active .nav-item-dot { background: var(--nav-accent) !important; box-shadow: 0 0 5px rgba(255,152,0,0.45) !important; }
         body.theme-light .nav-item-dot { background: rgba(10,77,122,0.25) !important; }
-        body.theme-light .nav-item.active::before { background: var(--cb-accent) !important; box-shadow: 0 0 6px rgba(26,163,232,0.4) !important; }
+        body.theme-light .nav-item.active::before { background: var(--nav-accent) !important; box-shadow: 0 0 6px rgba(255,152,0,0.45) !important; }
         body.theme-light #sidebar-footer .dev-card { background: var(--cb-bg) !important; border-color: rgba(10,77,122,0.08) !important; }
         body.theme-light #sidebar-footer .dev-name { color: var(--cb-header) !important; }
         body.theme-light #sidebar-footer .dev-role { color: var(--cb-muted) !important; }
@@ -711,9 +738,9 @@
             <span></span><span></span><span></span>
         </button>
         <div id="logo-area">
-            <div class="logo-icon">G</div>
+            <div class="logo-icon">GIANT</div>
             <div>
-                <h1>Giant.V1</h1>
+                <h1> V 1 . 2</h1>
             </div>
         </div>
     </div>
@@ -777,12 +804,15 @@
                 <svg class="cat-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M19 9l-7 7-7-7" stroke-linecap="round" stroke-linejoin="round"/></svg>
             </button>
             <div class="cat-items">
-                <button class="nav-item" onclick="window.open('https://sites.google.com/giantinterholding.co.th/system/verification', '_blank')">
+                <!-- Previous General URL: https://sites.google.com/giantinterholding.co.th/system/verification -->
+                <button class="nav-item lazy-frame" data-src="https://script.google.com/macros/s/AKfycbx5fcffGAa4FPA3f3ZmHJQwG2ElzJHzN2TU_7tNs_86Juj29BnU-LiOH-0zXUcl_pKg/exec">
                     <span class="nav-item-dot"></span><span class="nav-item-text">General</span>
                 </button>
-                <button class="nav-item" onclick="window.open('https://sites.google.com/giantinterholding.co.th/koitoscanner/koito', '_blank')">
+                <!-- Previous Koito URL: https://sites.google.com/giantinterholding.co.th/koitoscanner/koito -->
+                <button class="nav-item lazy-frame" data-src="https://script.google.com/macros/s/AKfycbw1_23pW6a4q_f_aJb9CRBppqALWmWZuoqNGsZ5wBHUbkG0Uh28W-uIbDqB-rqXPXbi/exec">
                     <span class="nav-item-dot"></span><span class="nav-item-text">Koito</span>
                 </button>
+                <button class="nav-item" data-src="https://script.google.com/macros/s/AKfycbw7LosY_iGgXoo3BGyFjgK4SuFuwPb2JUVMIgEnseRm11iXpHIG4NMTlRZSWuAWEfMH2A/exec"><span class="nav-item-dot"></span><span class="nav-item-text">Tag Master Giant</span></button>
             </div>
         </div>
 
@@ -840,9 +870,10 @@
                 <button class="nav-item" data-src="https://script.google.com/macros/s/AKfycbxF-aspVmc-pY_Zum_KijM-iETVvNrWbc8GgcYYhr60QnZsGc_63eNTwfLUYfT07GrThg/exec"><span class="nav-item-dot"></span><span class="nav-item-text">🌎 จัดเส้นทาง</span></button>
                 <button class="nav-item" data-src="https://script.google.com/a/macros/giantinterholding.co.th/s/AKfycbyE9vz2RZIOvJUixIh8FuBYq5vvI3r7wzmWT_kzZIFCMG66PTm1VuNyH9SOLNKg-ctb/exec"><span class="nav-item-dot"></span><span class="nav-item-text">ตารางวางบิล</span></button>
                 <button class="nav-item" data-src="https://script.google.com/macros/s/AKfycbx9u61wkYIzSHtygqkJJJo45q-h60AbwYaj1QIc4hwOZfjm8zjXFI8Rdxf72lclEaL3nA/exec"><span class="nav-item-dot"></span><span class="nav-item-text">Flow System</span></button>
-                <button class="nav-item" data-src="https://script.google.com/a/macros/giantinterholding.co.th/s/AKfycbyA5OEZvGOMRbTT4z9nQbO3DzlLBK7BhkTWM0JKnS5jvq88hMWWHjETc-IurhDfbVFmeA/exec"><span class="nav-item-dot"></span><span class="nav-item-text">ประวัติจัดส่ง</span></button>
+                <button class="nav-item" data-src="https://script.google.com/a/macros/giantinterholding.co.th/s/AKfycbwLij9r-lCoUY0FdPUlXk9MsQF1VZNxYVHw8o2RSRCDZLiHSTCZhLJe23Eg1WoQOy8DMg/exec"><span class="nav-item-dot"></span><span class="nav-item-text">ประวัติจัดส่ง</span></button>
                 <button class="nav-item" data-src="https://script.google.com/a/macros/giantinterholding.co.th/s/AKfycbyyu5ECPk-UfuH1TFef1xoRK1LcPcpp9Skz4saZ0DpujDG41XNheeQZXy67OiR-hH2nJA/exec"><span class="nav-item-dot"></span><span class="nav-item-text">จองรถส่วนกลาง</span></button>
                 <button class="nav-item" data-src="https://script.google.com/a/macros/giantinterholding.co.th/s/AKfycbz1qyrJI_SyFHwCKVWHznpnEz5WfBK9AHHYgNEq_3JbTyupQuHP-JfwtNJ6EWPF_XdYRA/exec"><span class="nav-item-dot"></span><span class="nav-item-text">ภาษีประกันรถยนต์</span></button>
+                 <button class="nav-item" data-src="https://script.google.com/macros/s/AKfycbwKDC_aDKIJpWh5F6jB-n6DoZ9WXNQfT8V2kOZsQU8Y-xnceLUgAFTab0yGNwxYF9uL1w/exec"><span class="nav-item-dot"></span><span class="nav-item-text">เอกสาร LG</span></button>
             </div>
         </div>
 
@@ -858,7 +889,7 @@
                 <svg class="cat-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M19 9l-7 7-7-7" stroke-linecap="round" stroke-linejoin="round"/></svg>
             </button>
             <div class="cat-items">
-                <button class="nav-item" data-src="https://script.google.com/macros/s/AKfycbz-yW7ey5rBp93JmpXGV2AzSZIhvTM2vPM40GPak20tE3D9tpIRQbA9gjrnHs9j9vg62A/exec"><span class="nav-item-dot"></span><span class="nav-item-text">Planning 3 Day</span></button>
+                <button class="nav-item" data-src="https://script.google.com/macros/s/AKfycbyIKd5xsQOI68nEBwvD7MkXNo8U6GOuH2uRMM_-s2E9ToiHRLqvtk4SUEYB-gbQipYK/exec"><span class="nav-item-dot"></span><span class="nav-item-text">Planning Tag Generator</span></button>
                 <button class="nav-item" data-src="https://script.google.com/macros/s/AKfycbynThHYzuraHIZCxfjTcYAglysvdIvnoLAmw9JdYHpwqTaZC4QZcGid01w1abGZDzE6/exec"><span class="nav-item-dot"></span><span class="nav-item-text">Production Tracker</span></button>
             </div>
         </div>
@@ -1209,27 +1240,38 @@ document.addEventListener('DOMContentLoaded', function() {
     var BOOKING_SRC = 'https://script.google.com/a/macros/giantinterholding.co.th/s/AKfycbzx1grDDBJWrDTth0rD4KEPRqMf4_djzsRg5rj1K9iZjRYfmOLB5fHNFzczcEQYZnz-lw/exec';
     var bookingBtn = document.getElementById('booking-btn');
 
-    function preloadFrames() {
-        document.querySelectorAll('.nav-item[data-src]').forEach(function(btn) {
-            // ✅ ยกเว้น Logistics, IT, Dev Mode, Historical Data และ ใบเบิก (โหลดเฉพาะตอนคลิก)
-            if (
-                btn.closest('#cat-logistics') || 
-                btn.closest('#cat-it') || 
-                btn.closest('#cat-dev-mode') || 
-                btn.textContent.includes('Historical Data') ||
-                btn.textContent.includes('ใบเบิก')
-            ) return;
+   function preloadFrames() {
+    var toPreload = [];
 
-            var src = btn.dataset.src;
-            if (src && !iframeCache[src]) {
+    document.querySelectorAll('.nav-item[data-src]').forEach(function(btn) {
+        if (
+            btn.classList.contains('lazy-frame') ||
+            btn.closest('#cat-logistics') || 
+            btn.closest('#cat-it') || 
+            btn.closest('#cat-dev-mode') ||
+            btn.closest('#cat-inventory') ||  // ✅ เพิ่มตรงนี้
+            btn.textContent.includes('Historical Data') ||
+            btn.textContent.includes('ใบเบิก')
+        ) return;
+
+        var src = btn.dataset.src;
+        if (src && !iframeCache[src]) {
+            toPreload.push(src);
+        }
+    });
+
+    toPreload.forEach(function(src, index) {
+        setTimeout(function() {
+            if (!iframeCache[src]) {
                 var iframe = document.createElement('iframe');
                 iframe.className = 'app-iframe';
                 iframe.src = src;
                 contentArea.appendChild(iframe);
                 iframeCache[src] = iframe;
             }
-        });
-    }
+        }, index * 800);
+    });
+}
 
     function stopBookingFrame() {
         if (iframeCache[BOOKING_SRC]) {
@@ -1447,4 +1489,3 @@ applyZoom('compact');
 </script>
 </body>
 </html>
-
