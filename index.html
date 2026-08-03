@@ -1138,7 +1138,7 @@
             <h3>Manager System</h3>
             <button id="close-manager-modal-btn" class="modal-close">&times;</button>
         </div>
-        <iframe class="modal-iframe" src="https://script.google.com/macros/s/AKfycbx-JdDpoaQFO4plfTfR5Swm6Rcr9sGcQ_gIObbzFTnBK1Gvdw95J_kEL-ONfBozSfR8Xw/exec"></iframe>
+        <iframe class="modal-iframe" data-src="https://script.google.com/macros/s/AKfycbx-JdDpoaQFO4plfTfR5Swm6Rcr9sGcQ_gIObbzFTnBK1Gvdw95J_kEL-ONfBozSfR8Xw/exec" title="Manager System"></iframe>
     </div>
 </div>
 <div id="meeting-modal" class="full-modal hidden">
@@ -1147,7 +1147,7 @@
             <h3>Meeting Room Management</h3>
             <button id="close-meeting-modal-btn" class="modal-close">&times;</button>
         </div>
-        <iframe class="modal-iframe" src="https://script.google.com/a/macros/giantinterholding.co.th/s/AKfycbwIKDApo_ZrhKsfQ5IOZAdslWwUHsgVOjYn5UCeFVBjHwDvVjrV8eBbRO9T_H9-Jq1VJw/exec"></iframe>
+        <iframe class="modal-iframe" data-src="https://script.google.com/a/macros/giantinterholding.co.th/s/AKfycbwIKDApo_ZrhKsfQ5IOZAdslWwUHsgVOjYn5UCeFVBjHwDvVjrV8eBbRO9T_H9-Jq1VJw/exec" title="Meeting Room Management"></iframe>
     </div>
 </div>
 
@@ -1209,25 +1209,30 @@ document.addEventListener('DOMContentLoaded', function() {
             var isClosing = group.classList.contains('open'); 
             group.classList.toggle('open');
 
-            // ✅ ลบหน้าเว็บ (Iframe) ทิ้งเมื่อมีการปิดเมนู Logistics หรือ อื่นๆ เพื่อประหยัด RAM
-            if (isClosing && (group.id === 'cat-logistics' || group.id === 'cat-other')) {
+            // ย่อหมวดแล้วถอด iframe ของหมวดนั้นออกทั้งหมด เพื่อหยุดการทำงานและคืน RAM
+            if (isClosing) {
                 var buttons = group.querySelectorAll('.nav-item[data-src]');
                 var activeRemoved = false;
 
                 buttons.forEach(function(btn) {
                     var src = btn.dataset.src;
+                    if (btn.classList.contains('active')) {
+                        activeRemoved = true;
+                    }
                     if (src && iframeCache[src]) {
                         if (iframeCache[src].classList.contains('visible')) {
                             activeRemoved = true;
                         }
                         iframeCache[src].remove();
                         delete iframeCache[src];
-                        btn.classList.remove('active');
                     }
+                    btn.classList.remove('active');
                 });
 
                 if (activeRemoved) {
-                    resetToWelcome();
+                    var loader = document.getElementById('main-loader');
+                    if (loader) loader.style.display = 'none';
+                    showWelcomeState();
                 }
             }
         });
@@ -1387,11 +1392,13 @@ applyZoom('compact');
         var modal = document.getElementById(modalId);
         var openBtn = document.getElementById(openBtnId);
         var closeBtn = document.getElementById(closeBtnId);
+        var modalFrame = modal ? modal.querySelector('.modal-iframe[data-src]') : null;
         var previousZoom = null;
         if (!modal) return;
 
         function closeModal() {
             modal.classList.add('hidden');
+            if (modalFrame) modalFrame.removeAttribute('src');
             if (openBtn) openBtn.classList.remove('active-btn');
             if (previousZoom) {
                 applyZoom(previousZoom);
@@ -1407,6 +1414,9 @@ applyZoom('compact');
             applyZoom('normal');
             clearHeaderActive();
             openBtn.classList.add('active-btn');
+            if (modalFrame && !modalFrame.getAttribute('src')) {
+                modalFrame.src = modalFrame.dataset.src;
+            }
             modal.classList.remove('hidden');
         });
         if (closeBtn) closeBtn.addEventListener('click', closeModal);
@@ -1484,8 +1494,9 @@ applyZoom('compact');
         });
     });
 
-    preloadFrames();
+   // preloadFrames();
 });
+
 </script>
 </body>
 </html>
