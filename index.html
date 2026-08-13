@@ -700,10 +700,10 @@ body:not(.theme-light) #clock-analog div:last-child {
                 <svg class="cat-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M19 9l-7 7-7-7" stroke-linecap="round" stroke-linejoin="round"/></svg>
             </button>
             <div class="cat-items">
-                <button class="nav-item" data-src="https://r10-1-stock-system.preecha-lanch.workers.dev/"><span class="nav-item-dot"></span><span class="nav-item-text">Material-R10/1</span></button>
+                <button class="nav-item" data-src="https://r10-1-stock-system.giant-it.workers.dev/"><span class="nav-item-dot"></span><span class="nav-item-text">Material-R10/1</span></button>
                 <button class="nav-item" data-src="https://script.google.com/a/macros/giantinterholding.co.th/s/AKfycbyn-tb3v5dJtqO9He7Qhaw2AN0rA2TCedngzk3wta33ZBebIfpq-z9TNkJPtENPTLWK/exec"><span class="nav-item-dot"></span><span class="nav-item-text">FG (Converter)-R11</span></button>
-                <button class="nav-item" data-src="https://r12-stock-system.preecha-lanch.workers.dev/"><span class="nav-item-dot"></span><span class="nav-item-text">FG (Converter)-R12</span></button>
-                <button class="nav-item" data-src="https://r9-stock-system.preecha-lanch.workers.dev/"><span class="nav-item-dot"></span><span class="nav-item-text">FG (Injection) R9</span></button>
+                <button class="nav-item" data-src="https://r12-stock-system.giant-it.workers.dev/"><span class="nav-item-dot"></span><span class="nav-item-text">FG (Converter)-R12</span></button>
+                <button class="nav-item" data-src="https://r9-stock-system.giant-it.workers.dev/"><span class="nav-item-dot"></span><span class="nav-item-text">FG (Injection) R9</span></button>
                 <button class="nav-item" data-src="https://script.google.com/a/macros/giantinterholding.co.th/s/AKfycbziljNHVPFYKtFE7TG_HjLQzGFUt8nYAB6N-MiSOHhyxfDm4YN5xhlx8a9bDhZ5f9CY/exec"><span class="nav-item-dot"></span><span class="nav-item-text">Stock-WIP</span></button>
                 <button class="nav-item" data-src="https://script.google.com/a/macros/giantinterholding.co.th/s/AKfycbwserC3uuZmkYe3aQRvvlFuAJOn196f444OJVGPOrYzUj5DxOIy7I1qjIdpzqhQdi1N2g/exec"><span class="nav-item-dot"></span><span class="nav-item-text">Historical Data</span></button>
             </div>
@@ -910,25 +910,6 @@ body:not(.theme-light) #clock-analog div:last-child {
     ข้อมูลอัพเดทเป็นปัจจุบันแล้ว
 </div>
 
-<div id="manager-modal" class="full-modal hidden">
-    <div class="modal-inner">
-        <div class="modal-topbar" style="background:linear-gradient(135deg,#7c3aed,#4f46e5)">
-            <h3>Manager System</h3>
-            <button id="close-manager-modal-btn" class="modal-close">&times;</button>
-        </div>
-        <iframe class="modal-iframe" src="https://script.google.com/macros/s/AKfycbx-JdDpoaQFO4plfTfR5Swm6Rcr9sGcQ_gIObbzFTnBK1Gvdw95J_kEL-ONfBozSfR8Xw/exec" data-src="https://script.google.com/macros/s/AKfycbx-JdDpoaQFO4plfTfR5Swm6Rcr9sGcQ_gIObbzFTnBK1Gvdw95J_kEL-ONfBozSfR8Xw/exec" title="Manager System"></iframe>
-    </div>
-</div>
-<div id="meeting-modal" class="full-modal hidden">
-    <div class="modal-inner">
-        <div class="modal-topbar" style="background:linear-gradient(135deg,#0a4d7a,#1aa3e8)">
-            <h3>Meeting Room Management</h3>
-            <button id="close-meeting-modal-btn" class="modal-close">&times;</button>
-        </div>
-        <iframe class="modal-iframe" src="https://script.google.com/a/macros/giantinterholding.co.th/s/AKfycbwIKDApo_ZrhKsfQ5IOZAdslWwUHsgVOjYn5UCeFVBjHwDvVjrV8eBbRO9T_H9-Jq1VJw/exec" data-src="https://script.google.com/a/macros/giantinterholding.co.th/s/AKfycbwIKDApo_ZrhKsfQ5IOZAdslWwUHsgVOjYn5UCeFVBjHwDvVjrV8eBbRO9T_H9-Jq1VJw/exec" title="Meeting Room Management"></iframe>
-    </div>
-</div>
-
 <script>
 document.addEventListener('DOMContentLoaded', function() {
     var IS_MOBILE = function() { return window.innerWidth < 768; };
@@ -962,7 +943,11 @@ document.addEventListener('DOMContentLoaded', function() {
     var welcomeSlider = document.getElementById('welcome-slider');
     var iframeCache = {};
     var BOOKING_SRC = 'https://script.google.com/a/macros/giantinterholding.co.th/s/AKfycbzx1grDDBJWrDTth0rD4KEPRqMf4_djzsRg5rj1K9iZjRYfmOLB5fHNFzczcEQYZnz-lw/exec';
+    var MANAGER_SRC = 'https://script.google.com/macros/s/AKfycbx-JdDpoaQFO4plfTfR5Swm6Rcr9sGcQ_gIObbzFTnBK1Gvdw95J_kEL-ONfBozSfR8Xw/exec';
+    var MEETING_SRC = 'https://script.google.com/a/macros/giantinterholding.co.th/s/AKfycbwIKDApo_ZrhKsfQ5IOZAdslWwUHsgVOjYn5UCeFVBjHwDvVjrV8eBbRO9T_H9-Jq1VJw/exec';
     var bookingBtn = document.getElementById('booking-btn');
+    var managerBtn = document.getElementById('manager-btn');
+    var meetingBtn = document.getElementById('meeting-btn');
 
     document.querySelectorAll('.cat-toggle').forEach(function(toggle) {
         toggle.addEventListener('click', function() {
@@ -1005,6 +990,16 @@ document.addEventListener('DOMContentLoaded', function() {
         if (bookingBtn) bookingBtn.classList.remove('active-btn');
     }
 
+    function stopManagerFrame() {
+        if (iframeCache[MANAGER_SRC]) { iframeCache[MANAGER_SRC].remove(); delete iframeCache[MANAGER_SRC]; }
+        if (managerBtn) managerBtn.classList.remove('active-btn');
+    }
+
+    function stopMeetingFrame() {
+        if (iframeCache[MEETING_SRC]) { iframeCache[MEETING_SRC].remove(); delete iframeCache[MEETING_SRC]; }
+        if (meetingBtn) meetingBtn.classList.remove('active-btn');
+    }
+
     function showWelcomeState() {
         welcomeSlider.style.display = 'block';
         Object.values(iframeCache).forEach(function(f) { f.classList.remove('visible'); });
@@ -1014,6 +1009,8 @@ document.addEventListener('DOMContentLoaded', function() {
 
     function showFrame(src) {
         if (src !== BOOKING_SRC) stopBookingFrame();
+        if (src !== MANAGER_SRC) stopManagerFrame();
+        if (src !== MEETING_SRC) stopMeetingFrame();
         welcomeSlider.style.display = 'none';
         Object.values(iframeCache).forEach(function(f) { f.classList.remove('visible'); });
         var loader = document.getElementById('main-loader');
@@ -1030,7 +1027,7 @@ document.addEventListener('DOMContentLoaded', function() {
         ['booking-btn','manager-btn','meeting-btn'].forEach(function(id) { var el = document.getElementById(id); if (el) el.classList.remove('active-btn'); });
     }
 
-    function resetToWelcome() { stopBookingFrame(); showWelcomeState(); preloadFrames(); showToast(); }
+    function resetToWelcome() { stopBookingFrame(); stopManagerFrame(); stopMeetingFrame(); showWelcomeState(); preloadFrames(); showToast(); }
 
     document.querySelectorAll('.nav-item[data-src]').forEach(function(btn) {
         btn.addEventListener('click', function() {
@@ -1061,32 +1058,25 @@ document.addEventListener('DOMContentLoaded', function() {
         document.getElementById('fs-compress').style.display = fs ? 'block' : 'none';
     });
 
-    function getActiveZoomType() { var a = document.querySelector('#zoom-controls button.active-zoom'); return a ? a.dataset.zoom : 'compact'; }
+    managerBtn.addEventListener('click', function() {
+        document.querySelectorAll('.nav-item').forEach(function(b) { b.classList.remove('active'); });
+        clearHeaderActive(); managerBtn.classList.add('active-btn');
+        showFrame(MANAGER_SRC);
+        if (IS_MOBILE()) closeSidebar();
+    });
 
-    function setupModal(openBtnId, modalId, closeBtnId) {
-        var modal = document.getElementById(modalId);
-        var openBtn = document.getElementById(openBtnId);
-        var closeBtn = document.getElementById(closeBtnId);
-        var modalFrame = modal ? modal.querySelector('.modal-iframe[data-src]') : null;
-        var previousZoom = null;
-        if (!modal) return;
-        function closeModal() { modal.classList.add('hidden'); if (modalFrame) modalFrame.removeAttribute('src'); if (openBtn) openBtn.classList.remove('active-btn'); if (previousZoom) { applyZoom(previousZoom); previousZoom = null; } }
-        if (openBtn) openBtn.addEventListener('click', function() {
-            var wasBookingOpen = !!iframeCache[BOOKING_SRC] && iframeCache[BOOKING_SRC].classList.contains('visible');
-            stopBookingFrame(); if (wasBookingOpen) showWelcomeState();
-            previousZoom = getActiveZoomType(); applyZoom('normal'); clearHeaderActive(); openBtn.classList.add('active-btn');
-            if (modalFrame && !modalFrame.getAttribute('src')) modalFrame.src = modalFrame.dataset.src;
-            modal.classList.remove('hidden');
-        });
-        if (closeBtn) closeBtn.addEventListener('click', closeModal);
-        modal.addEventListener('click', function(e) { if (e.target === modal) closeModal(); });
-    }
-    setupModal('manager-btn', 'manager-modal', 'close-manager-modal-btn');
-    setupModal('meeting-btn', 'meeting-modal', 'close-meeting-modal-btn');
+    meetingBtn.addEventListener('click', function() {
+        document.querySelectorAll('.nav-item').forEach(function(b) { b.classList.remove('active'); });
+        clearHeaderActive(); meetingBtn.classList.add('active-btn');
+        showFrame(MEETING_SRC);
+        if (IS_MOBILE()) closeSidebar();
+    });
 
     bookingBtn.addEventListener('click', function() {
         var loader = document.getElementById('main-loader'); if (loader) loader.style.display = 'none';
         document.querySelectorAll('.nav-item').forEach(function(b) { b.classList.remove('active'); });
+        stopManagerFrame();
+        stopMeetingFrame();
         clearHeaderActive(); bookingBtn.classList.add('active-btn');
         welcomeSlider.style.display = 'none';
         Object.values(iframeCache).forEach(function(f) { f.classList.remove('visible'); });
